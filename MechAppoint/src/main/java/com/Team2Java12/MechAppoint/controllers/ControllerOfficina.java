@@ -15,31 +15,31 @@ public class ControllerOfficina {
     private OfficinaService officinaService;
 
 
-    @PostMapping
-    public ResponseEntity<Officina>createOfficina(@RequestBody Officina officina){
+    @PostMapping("/postOfficina")
+    public ResponseEntity<?> createOfficina (@RequestBody Officina officina){
 
         officinaService.saveOfficina(officina);
         return ResponseEntity.ok().build();
 
     }
-    @GetMapping({"officinaid"})
-    public ResponseEntity<Officina> retrieveOfficina(@PathVariable ("officinaid") int officinaid){
+    @GetMapping("{officinaid}")
+    public ResponseEntity<Officina> retrieveOfficina(@PathVariable ("officinaid") Integer officinaid){
 
       return ResponseEntity.ok(officinaService.getOfficina(officinaid));
 
     }
 
-    @PutMapping("officinaid")
+    @PutMapping("{officinaid}")
 
-        public ResponseEntity<Officina>updateOfficina(@RequestBody Officina officina, @PathVariable("officcinaid") int officicnaid){
+        public ResponseEntity<Officina>updateOfficina(@RequestBody Officina officina, @PathVariable("officcinaid") Integer officicnaid){
 
         officinaService.updateOfficina(officina,officicnaid);
         return ResponseEntity.ok().build();
 
     }
-    @DeleteMapping({"officinaid"})
+    @DeleteMapping("{officinaid}")
 
-        public ResponseEntity<Officina> deleteOfficina (@PathVariable ("officinaid") int officinaid){
+        public ResponseEntity<Officina> deleteOfficina (@PathVariable ("officinaid") Integer officinaid){
         officinaService.deleteOfficna(officinaid);
         return ResponseEntity.ok().build();
     }

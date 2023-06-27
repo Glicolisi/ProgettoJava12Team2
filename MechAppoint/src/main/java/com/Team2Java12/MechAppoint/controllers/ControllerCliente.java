@@ -1,7 +1,7 @@
 package com.Team2Java12.MechAppoint.controllers;
 
 import com.Team2Java12.MechAppoint.entities.Cliente;
-import com.Team2Java12.MechAppoint.service.ClientiService;
+import com.Team2Java12.MechAppoint.servicies.ClientiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ public class ControllerCliente {
         this.clientiService = clientiService;
     }
 
-    @PostMapping()
+    @PostMapping("/postCliente")
     public ResponseEntity<?> createCliente(@RequestBody Cliente cliente) {
         clientiService.createCliente(cliente);
         return ResponseEntity.ok().build();

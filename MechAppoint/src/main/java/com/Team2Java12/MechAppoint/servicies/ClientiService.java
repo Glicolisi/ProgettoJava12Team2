@@ -1,4 +1,4 @@
-package com.Team2Java12.MechAppoint.service;
+package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.repositories.ClientiRepository;

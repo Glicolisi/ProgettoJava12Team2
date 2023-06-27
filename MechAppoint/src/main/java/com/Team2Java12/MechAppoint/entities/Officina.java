@@ -18,23 +18,23 @@ private Integer officinaid;
 private String nome;
 private String indirizzo;
 private String email;
-private List<Impiegato> impiegatoList;
-private List<Listino> listinoList;
+//private List<Impiegato> impiegatoList;
+//private List<Listino> listinoList;
 
     public Officina( String nome, String indirizzo, String email) {
 
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.email = email;
-        this.impiegatoList = new ArrayList<>();
-        this.listinoList = new ArrayList<>();
+//        this.impiegatoList = new ArrayList<>();
+//        this.listinoList = new ArrayList<>();
 
     }
 
     public Officina() {
     }
 
-    @ManyToMany(mappedBy = "clienti")
+    @ManyToMany(mappedBy = "officine")
     private List<Cliente> clienti;
 
 
@@ -64,21 +64,21 @@ private List<Listino> listinoList;
         this.email = email;
     }
 
-    public List<Impiegato> getImpiegatoList() {
-        return impiegatoList;
-    }
+//    public List<Impiegato> getImpiegatoList() {
+//        return impiegatoList;
+//    }
+//
+//    public void setImpiegatoList(List<Impiegato> impiegatoList) {
+//        this.impiegatoList = impiegatoList;
+//    }
 
-    public void setImpiegatoList(List<Impiegato> impiegatoList) {
-        this.impiegatoList = impiegatoList;
-    }
-
-    public List<Listino> getListinoList() {
-        return listinoList;
-    }
-
-    public void setListinoList(List<Listino> listinoList) {
-        this.listinoList = listinoList;
-    }
+//    public List<Listino> getListinoList() {
+//        return listinoList;
+//    }
+//
+//    public void setListinoList(List<Listino> listinoList) {
+//        this.listinoList = listinoList;
+//    }
 
     public List<Cliente> getClienti() {
         return clienti;
