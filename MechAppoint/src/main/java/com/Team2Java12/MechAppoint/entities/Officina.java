@@ -33,4 +33,58 @@ private List<Listino> listinoList;
 
     public Officina() {
     }
+
+    @ManyToMany(mappedBy = "clienti")
+    private List<Cliente> clienti;
+
+
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Impiegato> getImpiegatoList() {
+        return impiegatoList;
+    }
+
+    public void setImpiegatoList(List<Impiegato> impiegatoList) {
+        this.impiegatoList = impiegatoList;
+    }
+
+    public List<Listino> getListinoList() {
+        return listinoList;
+    }
+
+    public void setListinoList(List<Listino> listinoList) {
+        this.listinoList = listinoList;
+    }
+
+    public List<Cliente> getClienti() {
+        return clienti;
+    }
+
+    public void setClienti(List<Cliente> clienti) {
+        this.clienti = clienti;
+    }
 }
