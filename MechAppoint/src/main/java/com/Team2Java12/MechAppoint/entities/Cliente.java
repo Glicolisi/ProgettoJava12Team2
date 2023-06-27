@@ -2,6 +2,8 @@ package com.Team2Java12.MechAppoint.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Clienti")
 public class Cliente {
@@ -25,6 +27,12 @@ public class Cliente {
     public Cliente() {
     }
 
+    @ManyToMany
+    @JoinTable(name = "Clienti/Officine",
+            joinColumns = @JoinColumn(name = "Id"),
+            inverseJoinColumns = @JoinColumn(name = "officinaid"))
+    private List<Officina> officine;
+
     public Integer getId() {
         return id;
     }
@@ -47,5 +55,29 @@ public class Cliente {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Officina> getOfficine() {
+        return officine;
+    }
+
+    public void setOfficine(List<Officina> officine) {
+        this.officine = officine;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getCellulare() {
+        return cellulare;
+    }
+
+    public void setCellulare(Integer cellulare) {
+        this.cellulare = cellulare;
     }
 }
