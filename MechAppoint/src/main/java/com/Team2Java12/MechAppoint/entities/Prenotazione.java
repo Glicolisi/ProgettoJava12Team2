@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nomeCliente;
     private String data;
     private String orario;
@@ -24,11 +24,11 @@ public class Prenotazione {
         this.orario = orario;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
