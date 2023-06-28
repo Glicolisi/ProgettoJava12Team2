@@ -1,13 +1,13 @@
 package com.Team2Java12.MechAppoint.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
+@Table(name= "Prenotazione")
 public class Prenotazione {
     @Id
+    @Column(name="prenotazione_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nomeCliente;
@@ -15,8 +15,12 @@ public class Prenotazione {
     private String orario;
 
 
-    protected Prenotazione() {
+    public Prenotazione() {
     }
+    @OneToOne
+    @JoinColumn(name = "officinaid")
+    private Officina officina;
+
 
     public Prenotazione(String nomeCliente, String data, String orario) {
         this.nomeCliente = nomeCliente;
