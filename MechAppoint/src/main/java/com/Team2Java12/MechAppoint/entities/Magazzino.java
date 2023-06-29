@@ -1,15 +1,15 @@
 package com.Team2Java12.MechAppoint.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
+
 
 @Entity
+@Table(name="Magazzino")
 public class Magazzino {
     @Id
+    @Column(name="magazzinoid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer magazzinoid;
     private String nomeOfficina;
     private Integer inventario;
 
@@ -22,11 +22,11 @@ public class Magazzino {
     }
 
     public Integer getId() {
-        return id;
+        return magazzinoid;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.magazzinoid = id;
     }
 
     public String getNomeOfficina() {

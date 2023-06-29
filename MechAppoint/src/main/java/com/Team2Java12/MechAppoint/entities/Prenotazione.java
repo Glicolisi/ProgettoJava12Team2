@@ -1,13 +1,12 @@
 package com.Team2Java12.MechAppoint.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="Prenotazione")
 public class Prenotazione {
     @Id
+    @Column(name="prenotazioneid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nomeCliente;

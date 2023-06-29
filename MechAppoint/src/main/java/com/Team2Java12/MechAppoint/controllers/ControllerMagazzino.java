@@ -2,6 +2,7 @@ package com.Team2Java12.MechAppoint.controllers;
 
 
 import com.Team2Java12.MechAppoint.entities.Magazzino;
+
 import com.Team2Java12.MechAppoint.servicies.MagazzinoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class ControllerMagazzino {
 
     @Autowired
+
     private MagazzinoService magazzinoService;
 
 
     @PostMapping("/postMagazzino")
-    public ResponseEntity<?> createMagazzino (@RequestBody Magazzino magazzino){
+    public ResponseEntity<Magazzino> createMagazzino (@RequestBody Magazzino magazzino){
 
-        magazzinoService.saveMagazzino(magazzino);
+        magazzinoService.createMagazzino(magazzino);
         return ResponseEntity.ok().build();
 
     }
@@ -43,5 +45,4 @@ public class ControllerMagazzino {
         magazzinoService.deleteMagazzino(magazzinoid);
         return ResponseEntity.ok().build();
     }
-}
 }

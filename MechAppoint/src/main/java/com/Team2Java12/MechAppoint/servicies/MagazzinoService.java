@@ -5,6 +5,9 @@ import com.Team2Java12.MechAppoint.entities.Magazzino;
 import com.Team2Java12.MechAppoint.repositories.MagazzinoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class MagazzinoService{
 

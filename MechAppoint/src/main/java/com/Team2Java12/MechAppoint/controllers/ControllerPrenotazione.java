@@ -15,9 +15,9 @@ public class ControllerPrenotazione {
 
 
     @PostMapping("/postPrenotazione")
-    public ResponseEntity<?> createPrenotazione (@RequestBody Prenotazione prenotazione){
+    public ResponseEntity<Prenotazione> createPrenotazione (@RequestBody Prenotazione prenotazione){
 
-        prenotazioneService.savePrenotazione(prenotazione);
+        prenotazioneService.createPrenotazione(prenotazione);
         return ResponseEntity.ok().build();
 
     }

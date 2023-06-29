@@ -37,10 +37,10 @@ private String email;
 
     @ManyToMany(mappedBy = "officine")
     private List<Cliente> clienti;
-    @OneToOne(mappedBy = "officine")
+    /*@OneToOne(mappedBy = "officine")
     private Magazzino magazzino;
     @OneToOne(mappedBy = "officina")
-    private Prenotazione prenotazione;
+    private Prenotazione prenotazione;*/
 
 
 

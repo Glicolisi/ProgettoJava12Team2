@@ -15,7 +15,7 @@ public class ControllerOfficina {
 
 
     @PostMapping("/postOfficina")
-    public ResponseEntity<?> createOfficina (@RequestBody Officina officina){
+    public ResponseEntity<Officina> createOfficina (@RequestBody Officina officina){
 
         officinaService.saveOfficina(officina);
         return ResponseEntity.ok().build();
@@ -30,9 +30,9 @@ public class ControllerOfficina {
 
     @PutMapping("{officinaid}")
 
-        public ResponseEntity<Officina>updateOfficina(@RequestBody Officina officina, @PathVariable("officcinaid") Integer officicnaid){
+        public ResponseEntity<Officina>updateOfficina(@RequestBody Officina officina, @PathVariable("officcinaid") Integer officinaid){
 
-        officinaService.updateOfficina(officina,officicnaid);
+        officinaService.updateOfficina(officina,officinaid);
         return ResponseEntity.ok().build();
 
     }
