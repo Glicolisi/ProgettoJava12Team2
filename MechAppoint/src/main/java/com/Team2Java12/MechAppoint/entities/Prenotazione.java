@@ -2,6 +2,8 @@ package com.Team2Java12.MechAppoint.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Prenotazione")
 public class Prenotazione {
@@ -18,6 +20,18 @@ public class Prenotazione {
         this.nomeCliente = nomeCliente;
         this.data = data;
         this.orario = orario;
+    }
+
+    @ManyToOne
+    @JoinColumn(name ="officinaid")
+    private Officina officina;
+
+    public Officina getOfficina() {
+        return officina;
+    }
+
+    public void setOfficina(Officina officina) {
+        this.officina = officina;
     }
 
     public Prenotazione() {

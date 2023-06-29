@@ -13,10 +13,15 @@ public class Magazzino {
     private String nomeOfficina;
     private Integer inventario;
 
+    @OneToOne
+    @JoinColumn(name="officinaid")
+    private Officina officina;
+
     public Magazzino(String nomeOfficina, Integer inventario) {
         this.nomeOfficina = nomeOfficina;
         this.inventario = inventario;
     }
+
 
     public Magazzino() {
     }

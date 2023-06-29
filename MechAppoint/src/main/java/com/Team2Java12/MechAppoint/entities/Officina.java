@@ -37,13 +37,21 @@ private String email;
 
     @ManyToMany(mappedBy = "officine")
     private List<Cliente> clienti;
-    /*@OneToOne(mappedBy = "officine")
+
+
+    @OneToOne(mappedBy ="officina")
     private Magazzino magazzino;
-    @OneToOne(mappedBy = "officina")
-    private Prenotazione prenotazione;*/
 
+    @OneToMany(mappedBy = "officina")
+    private List<Prenotazione> prenotazioni;
 
+    public List<Prenotazione> getPrenotazioni() {
+        return prenotazioni;
+    }
 
+    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+        this.prenotazioni = prenotazioni;
+    }
 
     public String getNome() {
         return nome;
@@ -93,4 +101,11 @@ private String email;
         this.clienti = clienti;
     }
 
+    public Magazzino getMagazzino() {
+        return magazzino;
+    }
+
+    public void setMagazzino(Magazzino magazzino) {
+        this.magazzino = magazzino;
+    }
 }
