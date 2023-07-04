@@ -20,7 +20,8 @@ public class Cliente {
     private String email;
     private Integer cellulare;
 
-    public Cliente(String username, String password, String email, Integer cellulare) {
+    public Cliente(Integer id ,String username, String password, String email, Integer cellulare) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -31,9 +32,10 @@ public class Cliente {
     }
 
     @ManyToMany
-    @JoinTable(name = "Clienti/Officine",
+    @JoinTable(name = "Clienti_Officine",
             joinColumns = @JoinColumn(name = "Id"),
             inverseJoinColumns = @JoinColumn(name = "officinaid"))
+
     private List<Officina> officine;
 
     public Integer getId() {
@@ -83,5 +85,6 @@ public class Cliente {
     public void setCellulare(Integer cellulare) {
         this.cellulare = cellulare;
     }
+
 
 }
