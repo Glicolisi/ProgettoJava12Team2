@@ -31,10 +31,22 @@ public class Cliente {
     }
 
     @ManyToMany
-    @JoinTable(name = "Clienti/Officine",
+    @JoinTable(name = "Clienti_Officine",
             joinColumns = @JoinColumn(name = "Id"),
             inverseJoinColumns = @JoinColumn(name = "officinaid"))
     private List<Officina> officine;
+
+
+    @OneToMany (mappedBy = "cliente")
+    private List<Veicolo> veicoli;
+
+    public List<Veicolo> getVeicoli() {
+        return veicoli;
+    }
+
+    public void setVeicoli(List<Veicolo> veicoli) {
+        this.veicoli = veicoli;
+    }
 
     public Integer getId() {
         return id;

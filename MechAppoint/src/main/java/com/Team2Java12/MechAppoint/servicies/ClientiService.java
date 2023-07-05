@@ -26,4 +26,5 @@ public class ClientiService {
     public void deleteCliente (Integer Id) {
         clientiRepository.deleteById(Id);
     }
+
 }
