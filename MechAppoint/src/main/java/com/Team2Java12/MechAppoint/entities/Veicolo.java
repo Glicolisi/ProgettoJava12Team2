@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.entities;
 
-import com.Team2Java12.MechAppoint.dataStatus.Status;
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +16,7 @@ public class Veicolo {
     private String targa;
     private String dataImmatricolazione;
     private String proprietario;
-    private Status status;
+    private ValidationEnum status;
 
     public Veicolo(Integer id, String tipoVeicolo, String targa, String dataImmatricolazione, String proprietario) {
         this.id = id;
@@ -81,11 +81,11 @@ public class Veicolo {
         this.dataImmatricolazione = dataImmatricolazione;
     }
 
-    public Status getStatus() {
+    public ValidationEnum getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(ValidationEnum status) {
         this.status = status;
     }
 }

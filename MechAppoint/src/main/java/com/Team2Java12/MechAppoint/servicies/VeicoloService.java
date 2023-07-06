@@ -1,12 +1,11 @@
 package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
-import com.Team2Java12.MechAppoint.dataStatus.Status;
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Veicolo;
 import com.Team2Java12.MechAppoint.exception.NotFoundException;
 import com.Team2Java12.MechAppoint.repositories.VeicoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,7 +21,7 @@ public class VeicoloService {
         veicolo.setDataImmatricolazione(veicoloDTO.getDataImmatricolazione());
         veicolo.setTarga(veicoloDTO.getTarga());
         veicolo.setProprietario(veicoloDTO.getProprietario());
-        veicolo.setStatus(Status.ACTIVE);
+        veicolo.setStatus(ValidationEnum.ACTIVE);
         veicoloRepository.save(veicolo);
     }
 
@@ -61,7 +60,7 @@ public class VeicoloService {
             throw new RuntimeException();
         }
         Veicolo veicolo = oVeicolo.get();
-        veicolo.setStatus(Status.DELETED);
+        veicolo.setStatus(ValidationEnum.DELETED);
         veicoloRepository.save(veicolo);
         return new BaseResponse();
     }
