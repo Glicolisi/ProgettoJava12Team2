@@ -1,10 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateVeicoloRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.DeleteVeicoloRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.UpdateVeicoloRequestDTO;
-import com.Team2Java12.MechAppoint.entities.Veicolo;
+import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.servicies.VeicoloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +19,8 @@ public class VeicoloController {
     }
 
     @GetMapping ("{veicolo_id}")
-    public ResponseEntity<ResponseEntity<?>> retriveVeicolo (@PathVariable("veicolo_id") Integer veicoloId){
-        return ResponseEntity.ok(veicoloService.getVeicolo(veicoloId));
+    public GetVeicoloDTO retriveVeicolo (@PathVariable("veicolo_id") Integer veicoloId){
+        return veicoloService.getVeicolo(veicoloId);
     }
 
 

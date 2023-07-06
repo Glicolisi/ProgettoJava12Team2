@@ -3,6 +3,7 @@ package com.Team2Java12.MechAppoint.servicies;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.dataStatus.Status;
 import com.Team2Java12.MechAppoint.entities.Veicolo;
+import com.Team2Java12.MechAppoint.exception.NotFoundException;
 import com.Team2Java12.MechAppoint.repositories.VeicoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class VeicoloService {
         veicoloRepository.save(veicolo);
     }
 
-    public ResponseEntity<?> getVeicolo (Integer veicoloId) {
+    public GetVeicoloDTO getVeicolo (Integer veicoloId) {
         Optional<Veicolo> oVeicolo = veicoloRepository.findById(veicoloId);
         if (oVeicolo.isPresent()) {
             Veicolo veicolo = oVeicolo.get();
@@ -34,9 +35,9 @@ public class VeicoloService {
             veicoloDTO.setTarga(veicolo.getTarga());
             veicoloDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
             veicoloDTO.setProprietario(veicolo.getCliente().getUsername());
-            return ResponseEntity.ok(veicoloDTO);
+            return veicoloDTO;
         } else {
-            return ResponseEntity.badRequest().body("NOT FOUND");
+            throw new NotFoundException("NOT_FOUND");
         }
     }
 
