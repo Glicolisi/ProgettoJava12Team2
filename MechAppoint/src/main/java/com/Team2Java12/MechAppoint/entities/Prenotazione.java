@@ -15,16 +15,41 @@ public class Prenotazione {
     //TODO cambiare in Timestamp data e orario
     private String data;
     private String orario;
+    private ValidationEnum validation;
 
     public Prenotazione(String nomeCliente, String data, String orario) {
         this.nomeCliente = nomeCliente;
         this.data = data;
         this.orario = orario;
+
+    }
+
+    public Prenotazione(Integer id, String nomeCliente, String data, String orario, ValidationEnum validation) {
+        this.id = id;
+        this.nomeCliente = nomeCliente;
+        this.data = data;
+        this.orario = orario;
+        this.validation = validation;
     }
 
     @ManyToOne
     @JoinColumn(name ="officinaid")
     private Officina officina;
+
+    public Prenotazione(String nomeCliente, String data, String orario, ValidationEnum validation) {
+        this.nomeCliente = nomeCliente;
+        this.data = data;
+        this.orario = orario;
+        this.validation = validation;
+    }
+
+    public ValidationEnum getValidation() {
+        return validation;
+    }
+
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
+    }
 
     public Officina getOfficina() {
         return officina;
