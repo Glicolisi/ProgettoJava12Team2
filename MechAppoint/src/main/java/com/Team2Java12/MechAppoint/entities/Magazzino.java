@@ -1,5 +1,6 @@
 package com.Team2Java12.MechAppoint.entities;
 
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
 
@@ -12,6 +13,7 @@ public class Magazzino {
     private Integer magazzinoid;
     private String nomeOfficina;
     private Integer inventario;
+    private ValidationEnum status;
 
     @OneToOne
     @JoinColumn(name="officinaid")
@@ -48,5 +50,13 @@ public class Magazzino {
 
     public void setInventario(Integer inventario) {
         this.inventario = inventario;
+    }
+
+    public ValidationEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(ValidationEnum status) {
+        this.status = status;
     }
 }

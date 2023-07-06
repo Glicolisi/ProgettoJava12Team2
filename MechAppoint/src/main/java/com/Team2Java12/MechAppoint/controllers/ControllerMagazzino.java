@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.controllers;
 
 
+import com.Team2Java12.MechAppoint.controllers.DTO.CreateMagazzinoRequestDTO;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
 import com.Team2Java12.MechAppoint.servicies.MagazzinoService;
@@ -18,9 +19,9 @@ public class ControllerMagazzino {
 
 
     @PostMapping("/postMagazzino")
-    public ResponseEntity<Magazzino> createMagazzino (@RequestBody Magazzino magazzino){
+    public ResponseEntity<?> createMagazzino (@RequestBody CreateMagazzinoRequestDTO magazzinoDTO){
 
-        magazzinoService.createMagazzino(magazzino);
+        magazzinoService.createMagazzino(magazzinoDTO);
         return ResponseEntity.ok().build();
 
     }
@@ -31,7 +32,7 @@ public class ControllerMagazzino {
 
     }
 
-    @PutMapping("{magazzino_id}")
+    @PutMapping("/updateMagazzino")
 
     public ResponseEntity<Magazzino>updateMagazzino(@RequestBody Magazzino magazzino, @PathVariable("magazzino_id") Integer magazzinoid){
 
@@ -39,7 +40,7 @@ public class ControllerMagazzino {
         return ResponseEntity.ok().build();
 
     }
-    @DeleteMapping("{magazzino_id}")
+    @DeleteMapping("/deleteMagazzino")
 
     public ResponseEntity<Magazzino> deleteMagazzino (@PathVariable ("magazzino_id") Integer magazzinoid){
         magazzinoService.deleteMagazzino(magazzinoid);
