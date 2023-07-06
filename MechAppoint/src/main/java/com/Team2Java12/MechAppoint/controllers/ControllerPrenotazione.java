@@ -1,5 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers;
 
+import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
 import com.Team2Java12.MechAppoint.servicies.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +15,31 @@ public class ControllerPrenotazione {
     private PrenotazioneService prenotazioneService;
 
 
-    @PostMapping("/postPrenotazione")
-    public ResponseEntity<Prenotazione> createPrenotazione (@RequestBody Prenotazione prenotazione){
+    @PostMapping("/prenotazione/create")
+    public CreatePrenotazioneResponseDto createPrenotazione (@RequestBody CreatePrenotazioneRequestDto request){
 
-        prenotazioneService.createPrenotazione(prenotazione);
-        return ResponseEntity.ok().build();
-
-    }
-    @GetMapping("{prenotazione_id}")
-    public ResponseEntity<Prenotazione> retrievePrenotazione(@PathVariable("prenotazione_id") Integer prenotazioneid){
-
-        return ResponseEntity.ok(prenotazioneService.getPrenotazione(prenotazioneid));
+        return prenotazioneService.createPrenotazione(request);
 
     }
+    @GetMapping("/prenotazione/get")
+    public GetPrenotazioneResponseDto getPrenotazione(@RequestBody GetPrenotazioneRequestDto getPrenotazioneRequestDto){
 
-    @PutMapping("{prenotazione_id}")
-
-    public ResponseEntity<Prenotazione>updatePrenotazione(@RequestBody Prenotazione prenotazione, @PathVariable("prenotazione_id") Integer prenotazioneid){
-
-        prenotazioneService.updatePrenotazione(prenotazione,prenotazioneid);
-        return ResponseEntity.ok().build();
+        return prenotazioneService.getPrenotazioneResponseDto(getPrenotazioneRequestDto);
 
     }
-    @DeleteMapping("{prenotazione_id}")
 
-    public ResponseEntity<Prenotazione> deletePrenotazione (@PathVariable ("prenotazione_id") Integer prenotazioneid){
-        prenotazioneService.deletePrenotazione(prenotazioneid);
-        return ResponseEntity.ok().build();
+    @PutMapping("/prenotazione/put")
+
+    public BaseResponse updateOfficina(@RequestBody UpdatePrenotazioneRequestDto updatePrenotazioneRequestDto) {
+
+        prenotazioneService.updatePrenotazione(updatePrenotazioneRequestDto);
+        return new BaseResponse();
+
+    }
+    @DeleteMapping("/prenotazione/delete")
+    public BaseResponse deletePrenotazione(@RequestBody DeletePrenotazioneRequestDto deletePrenotazioneRequestDto){
+
+        return prenotazioneService.deletePrenotazione(deletePrenotazioneRequestDto);
+
     }
 }
