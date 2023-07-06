@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers.DTO;
 
-import com.Team2Java12.MechAppoint.entities.ValidationEnum;
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 
 public class BaseResponse {
     private ValidationEnum status = ValidationEnum.OK;
@@ -23,3 +23,4 @@ public class BaseResponse {
         return errorMessage;
     }
 }
+

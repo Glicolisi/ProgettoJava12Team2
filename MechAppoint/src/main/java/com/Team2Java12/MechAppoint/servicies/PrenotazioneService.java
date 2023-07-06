@@ -3,8 +3,8 @@ package com.Team2Java12.MechAppoint.servicies;
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
-import com.Team2Java12.MechAppoint.entities.ValidationEnum;
 import com.Team2Java12.MechAppoint.repositories.PrenotazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class PrenotazioneService {
 
     public CreatePrenotazioneResponseDto createPrenotazione (CreatePrenotazioneRequestDto request) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNome(request.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(request.getNomeCliente());
         optionalPrenotazione.orElseThrow(() -> new ConflictException());
         Prenotazione prenotazione = new Prenotazione(request.getNomeCliente(), request.getData(), request.getOrario(), request.getValidation());
         prenotazione = prenotazioneRepository.save(prenotazione);
@@ -47,7 +47,7 @@ public class PrenotazioneService {
 
     public BaseResponse updatePrenotazione(UpdatePrenotazioneRequestDto updatePrenotazione) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNome(updatePrenotazione.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(updatePrenotazione.getNomeCliente());
         optionalPrenotazione.orElseThrow(() -> new ConflictException());
         Prenotazione prenotazione = optionalPrenotazione.orElseThrow(() -> new NotFoundException("Errore, non sono stati trovati i parametri"));
         prenotazione.setNomeCliente(updatePrenotazione.getNomeCliente());

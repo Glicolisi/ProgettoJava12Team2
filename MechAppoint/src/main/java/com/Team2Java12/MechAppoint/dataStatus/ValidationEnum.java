@@ -1,11 +1,11 @@
-package com.Team2Java12.MechAppoint.entities;
+package com.Team2Java12.MechAppoint.dataStatus;
 
 public enum ValidationEnum {
 
     ACTIVE("Active"),
     DELETED("Deleted"),
-    OK("Ok"),
-    KO("Ko");
+    OK("OK"),
+    KO("KO");
 
     private String status;
 

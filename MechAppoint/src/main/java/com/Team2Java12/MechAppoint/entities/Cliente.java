@@ -38,6 +38,18 @@ public class Cliente {
 
     private List<Officina> officine;
 
+
+    @OneToMany (mappedBy = "cliente")
+    private List<Veicolo> veicoli;
+
+    public List<Veicolo> getVeicoli() {
+        return veicoli;
+    }
+
+    public void setVeicoli(List<Veicolo> veicoli) {
+        this.veicoli = veicoli;
+    }
+
     public Integer getId() {
         return id;
     }

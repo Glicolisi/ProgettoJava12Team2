@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.entities;
 
 
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,17 +20,21 @@ private Integer officinaid;
 private String nome;
 private String indirizzo;
 private String email;
-//private List<Impiegato> impiegatoList;
-//private List<Listino> listinoList;
+private ValidationEnum validation;
 
-    public Officina( String nome, String indirizzo, String email) {
-
+    public Officina(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
+        this.officinaid = officinaid;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.email = email;
-//        this.impiegatoList = new ArrayList<>();
-//        this.listinoList = new ArrayList<>();
+        this.validation = validation;
+    }
 
+    public Officina(String nome, String indirizzo, String email, ValidationEnum validation) {
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.email = email;
+        this.validation = validation;
     }
 
     public Officina() {
@@ -37,7 +42,6 @@ private String email;
 
     @ManyToMany(mappedBy = "officine")
     private List<Cliente> clienti;
-
 
     @OneToOne(mappedBy ="officina")
     private Magazzino magazzino;
@@ -51,6 +55,18 @@ private String email;
 
     public void setPrenotazioni(List<Prenotazione> prenotazioni) {
         this.prenotazioni = prenotazioni;
+    }
+
+    public Integer getOfficinaid() {
+        return officinaid;
+    }
+
+    public ValidationEnum getValidation() {
+        return validation;
+    }
+
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
     }
 
     public String getNome() {
@@ -76,22 +92,6 @@ private String email;
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    public List<Impiegato> getImpiegatoList() {
-//        return impiegatoList;
-//    }
-//
-//    public void setImpiegatoList(List<Impiegato> impiegatoList) {
-//        this.impiegatoList = impiegatoList;
-//    }
-
-//    public List<Listino> getListinoList() {
-//        return listinoList;
-//    }
-//
-//    public void setListinoList(List<Listino> listinoList) {
-//        this.listinoList = listinoList;
-//    }
 
     public List<Cliente> getClienti() {
         return clienti;
