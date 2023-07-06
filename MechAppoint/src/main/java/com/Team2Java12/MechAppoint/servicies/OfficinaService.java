@@ -18,14 +18,17 @@ public class OfficinaService {
 
     @Autowired
     private OfficinaRepository officinaRepository;
-    // TODO: Mettere a posto sta Propriety
-    //@Value("$app.feature.enablephysicaldeletion")
-    private boolean enablephysicaldeletion=false;
+
+    @Value("${app.feature.enablephysicaldeletion}")
+    private boolean enablephysicaldeletion;
 
     public CreateOfficinaResponseDto createOfficina (CreateOfficinaRequestDto request){
 
        Optional<Officina> optionalOfficina = officinaRepository.findByNome(request.getNome());
-       optionalOfficina.orElseThrow(() -> new ConflictException());
+       if(optionalOfficina.isPresent()){
+           optionalOfficina.orElseThrow(() -> new ConflictException());
+
+       }
        Officina officina = new Officina(request.getNome(), request.getIndirizzo(), request.getEmail(), request.getValidation());
        officina=officinaRepository.save(officina);
        CreateOfficinaResponseDto createOfficinaResponseDto = new CreateOfficinaResponseDto();
