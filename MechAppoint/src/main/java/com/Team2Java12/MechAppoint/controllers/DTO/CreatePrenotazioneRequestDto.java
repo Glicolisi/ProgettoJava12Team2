@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.controllers.DTO;
 
-import com.Team2Java12.MechAppoint.entities.ValidationEnum;
+
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 
 public class CreatePrenotazioneRequestDto {
     private String nomeCliente;

@@ -1,5 +1,6 @@
 package com.Team2Java12.MechAppoint.entities;
 
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
 import java.util.List;
