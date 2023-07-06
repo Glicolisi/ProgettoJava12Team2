@@ -19,7 +19,7 @@ public class PrenotazioneService {
 
     public CreatePrenotazioneResponseDto createPrenotazione (CreatePrenotazioneRequestDto request) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNome(request.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(request.getNomeCliente());
         optionalPrenotazione.orElseThrow(() -> new ConflictException());
         Prenotazione prenotazione = new Prenotazione(request.getNomeCliente(), request.getData(), request.getOrario(), request.getValidation());
         prenotazione = prenotazioneRepository.save(prenotazione);
@@ -47,7 +47,7 @@ public class PrenotazioneService {
 
     public BaseResponse updatePrenotazione(UpdatePrenotazioneRequestDto updatePrenotazione) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNome(updatePrenotazione.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(updatePrenotazione.getNomeCliente());
         optionalPrenotazione.orElseThrow(() -> new ConflictException());
         Prenotazione prenotazione = optionalPrenotazione.orElseThrow(() -> new NotFoundException("Errore, non sono stati trovati i parametri"));
         prenotazione.setNomeCliente(updatePrenotazione.getNomeCliente());

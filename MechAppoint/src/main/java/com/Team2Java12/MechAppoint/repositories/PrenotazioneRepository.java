@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione,Integer> {
-    Optional<Prenotazione> findByNome(String nome);
+    Optional<Prenotazione> findBynomeCliente(String nome);
 }
