@@ -14,36 +14,38 @@ import java.util.Optional;
 
 @Service
 
-public class MagazzinoService{
+public class MagazzinoService {
 
     @Autowired
     private MagazzinoRepository magazzinoRepository;
 
-    public void createMagazzino (CreateMagazzinoRequestDTO magazzinoDTO) {
-        Magazzino magazzino=new Magazzino();
+    public void createMagazzino(CreateMagazzinoRequestDTO magazzinoDTO) {
+        Magazzino magazzino = new Magazzino();
         magazzino.setNomeOfficina(magazzinoDTO.getNomeOfficina());
         magazzino.setInventario(magazzinoDTO.getInventario());
         magazzino.setStatus(ValidationEnum.ACTIVE);
         magazzinoRepository.save(magazzino);
     }
 
-    public GetMagazzinoDTO getMagazzino (Integer magazzinoId) {
-        Optional<Magazzino>aMagazzino=magazzinoRepository.findById(magazzinoId);
+    public GetMagazzinoDTO getMagazzino(Integer magazzinoId) {
+        Optional<Magazzino> aMagazzino = magazzinoRepository.findById(magazzinoId);
 
-         if(aMagazzino.isPresent()){
-             Magazzino magazzino=aMagazzino.get();
-             GetMagazzinoDTO magazzinoDTO=new GetMagazzinoDTO();
-             magazzinoDTO.setNomeOfficina(magazzino.getNomeOfficina())
-             ;
-         }
+        if (aMagazzino.isPresent()) {
+            Magazzino magazzino = aMagazzino.get();
+            GetMagazzinoDTO magazzinoDTO = new GetMagazzinoDTO();
+            magazzinoDTO.setNomeOfficina(magazzino.getNomeOfficina())
+            ;
+        }
+        return null;
     }
 
-    public void updateMagazzino (Magazzino magazzino, Integer magazzinoId) {
+    public void updateMagazzino(Magazzino magazzino, Integer magazzinoId) {
         magazzinoRepository.deleteById(magazzinoId);
         magazzinoRepository.save(magazzino);
     }
 
-    public void deleteMagazzino (Integer Id) {
+    public void deleteMagazzino(Integer Id) {
         magazzinoRepository.deleteById(Id);
     }
 }
+
