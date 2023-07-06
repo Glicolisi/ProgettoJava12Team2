@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.ClienteDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.CreateClienteRequestDTO;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.servicies.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ public class ControllerCliente {
     }
 
     @PostMapping("/postCliente")
-    public ResponseEntity<?> createCliente(@RequestBody ClienteDTO cliente) {
+    public ResponseEntity<CreateClienteRequestDTO> createCliente(@RequestBody CreateClienteRequestDTO cliente) {
         clientiService.createCliente(cliente);
-        return ResponseEntity.ok("Cliente creato");
+        return ResponseEntity.ok(cliente);
     }
 
     @GetMapping ("{ClienteId}")

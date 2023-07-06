@@ -3,6 +3,7 @@ package com.Team2Java12.MechAppoint.entities;
 
 
 
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,13 +20,23 @@ public class Cliente {
     private String password;
     private String email;
     private Integer cellulare;
+    private ValidationEnum validation;
 
-    public Cliente(Integer id ,String username, String password, String email, Integer cellulare) {
+    public Cliente(Integer id ,String username, String password, String email, Integer cellulare, ValidationEnum validation) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.cellulare = cellulare;
+        this.validation = validation;
+
+    }
+    public Cliente(String username, String password, String email, Integer cellulare, ValidationEnum validation) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.cellulare = cellulare;
+        this.validation = validation;
     }
 
     public Cliente() {
@@ -99,4 +110,11 @@ public class Cliente {
     }
 
 
+    public ValidationEnum getValidation() {
+        return validation;
+    }
+
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
+    }
 }

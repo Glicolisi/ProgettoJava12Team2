@@ -1,19 +1,10 @@
 package com.Team2Java12.MechAppoint.controllers.DTO;
 
-public class ClienteDTO {
-    private Integer id;
+public class UpdateClienteRequestDTO {
     private String username;
     private String password;
     private String email;
     private Integer cellulare;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
