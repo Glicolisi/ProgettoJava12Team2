@@ -1,11 +1,11 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Veicolo;
 
-public class UpdateVeicoloRequestDTO {
+public class GetVeicoloResponseDTO {
 
     private String tipoVeicolo;
     private String targa;
     private String dataImmatricolazione;
-    private Integer id;
+    private String proprietario;
 
     public String getTipoVeicolo() {
         return tipoVeicolo;
@@ -31,11 +31,11 @@ public class UpdateVeicoloRequestDTO {
         this.dataImmatricolazione = dataImmatricolazione;
     }
 
-    public Integer getId() {
-        return id;
+    public String getProprietario() {
+        return proprietario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
     }
 }

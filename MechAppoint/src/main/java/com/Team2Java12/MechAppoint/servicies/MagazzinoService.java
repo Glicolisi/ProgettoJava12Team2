@@ -2,6 +2,10 @@ package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.CreateMagazzinoRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.DeleteMagazzinoRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.UpdateMagazzinoRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
@@ -54,8 +58,8 @@ public class MagazzinoService {
         return new BaseResponse();
     }
 
-    public BaseResponse deleteMagazzino(DeletaMagazzinoRequestDTO deletaMagazzinoRequestDTO) {
-        Optional<Magazzino> optionalMagazzino = magazzinoRepository.findById(deletaMagazzinoRequestDTO.getId());
+    public BaseResponse deleteMagazzino(DeleteMagazzinoRequestDTO deleteMagazzinoRequestDTO) {
+        Optional<Magazzino> optionalMagazzino = magazzinoRepository.findById(deleteMagazzinoRequestDTO.getId());
         if (optionalMagazzino.isEmpty()) {
             throw new RuntimeException();
         }

@@ -1,8 +1,6 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Magazzino;
 
-import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
-
-public class CreateMagazzinoRequestDTO {
+public class GetMagazzinoDTO {
     private String nomeOfficina;
     private Integer inventario;
 
@@ -15,13 +13,12 @@ public class CreateMagazzinoRequestDTO {
         this.nomeOfficina = nomeOfficina;
     }
 
-    public Integer getInventario() {
-        return inventario;
+    public Integer getInventario(Integer inventario) {
+        return this.inventario;
     }
 
     public void setInventario(Integer inventario) {
         this.inventario = inventario;
     }
-
 
 }

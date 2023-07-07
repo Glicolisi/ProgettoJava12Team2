@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateClienteRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.servicies.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

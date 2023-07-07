@@ -1,5 +1,6 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
 
+import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 
 public class GetOfficinaResponseDto extends BaseResponse {

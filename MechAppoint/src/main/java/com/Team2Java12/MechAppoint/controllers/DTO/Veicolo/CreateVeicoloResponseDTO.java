@@ -1,4 +1,6 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Veicolo;
+
+import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 
 public class CreateVeicoloResponseDTO extends BaseResponse {
 

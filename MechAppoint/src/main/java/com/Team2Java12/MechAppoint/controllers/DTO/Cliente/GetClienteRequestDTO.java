@@ -1,4 +1,4 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
 public class GetClienteRequestDTO {
        private Integer id;

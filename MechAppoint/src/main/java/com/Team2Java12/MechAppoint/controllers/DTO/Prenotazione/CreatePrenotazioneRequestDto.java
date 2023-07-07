@@ -1,18 +1,13 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione;
 
-public class UpdatePrenotazioneRequestDto {
-    private Integer id;
+
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+
+public class CreatePrenotazioneRequestDto {
     private String nomeCliente;
     private String data;
     private String orario;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private ValidationEnum validation = ValidationEnum.ACTIVE;
 
     public String getNomeCliente() {
         return nomeCliente;
@@ -36,5 +31,13 @@ public class UpdatePrenotazioneRequestDto {
 
     public void setOrario(String orario) {
         this.orario = orario;
+    }
+
+    public ValidationEnum getValidation() {
+        return validation;
+    }
+
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
     }
 }

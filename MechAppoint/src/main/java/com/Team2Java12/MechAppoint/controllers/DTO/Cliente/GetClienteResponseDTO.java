@@ -1,14 +1,14 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 
-public class CreateClienteRequestDTO {
+public class GetClienteResponseDTO extends BaseResponse {
+    private Integer id;
     private String username;
     private String password;
     private String email;
     private Integer cellulare;
-    private ValidationEnum validation = ValidationEnum.ACTIVE;
-
+    private String validation = "ACTIVE";
 
 
     public String getUsername() {
@@ -43,11 +43,20 @@ public class CreateClienteRequestDTO {
         this.cellulare = cellulare;
     }
 
-    public ValidationEnum getValidation() {
+    public String getValidation() {
         return validation;
     }
 
-    public void setValidation(ValidationEnum validation) {
+    public void setValidation(String validation) {
         this.validation = validation;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

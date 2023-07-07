@@ -1,4 +1,4 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
 
 public class GetOfficinaRequestDto {
 

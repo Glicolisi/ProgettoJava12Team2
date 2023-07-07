@@ -1,8 +1,8 @@
 package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateClienteRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateClienteResponseDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteResponseDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;

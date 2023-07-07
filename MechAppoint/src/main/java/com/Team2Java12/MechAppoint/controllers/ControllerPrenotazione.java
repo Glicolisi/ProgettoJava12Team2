@@ -1,10 +1,9 @@
 package com.Team2Java12.MechAppoint.controllers;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
-import com.Team2Java12.MechAppoint.entities.Prenotazione;
+import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.*;
 import com.Team2Java12.MechAppoint.servicies.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

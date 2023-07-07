@@ -1,9 +1,9 @@
 package com.Team2Java12.MechAppoint.controllers;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.*;
 import com.Team2Java12.MechAppoint.servicies.VeicoloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -1,11 +1,18 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Veicolo;
 
-public class GetVeicoloResponseDTO {
-
+public class CreateVeicoloRequestDTO {
     private String tipoVeicolo;
     private String targa;
     private String dataImmatricolazione;
     private String proprietario;
+
+    public String getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
+    }
 
     public String getTipoVeicolo() {
         return tipoVeicolo;
@@ -29,13 +36,5 @@ public class GetVeicoloResponseDTO {
 
     public void setDataImmatricolazione(String dataImmatricolazione) {
         this.dataImmatricolazione = dataImmatricolazione;
-    }
-
-    public String getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
     }
 }

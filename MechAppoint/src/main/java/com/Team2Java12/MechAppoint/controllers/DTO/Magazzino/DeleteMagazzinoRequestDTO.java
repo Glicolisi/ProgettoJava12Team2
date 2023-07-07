@@ -1,7 +1,6 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Magazzino;
 
-public class DeleteVeicoloRequestDTO {
-
+public class DeleteMagazzinoRequestDTO {
     private Integer id;
 
     public Integer getId() {

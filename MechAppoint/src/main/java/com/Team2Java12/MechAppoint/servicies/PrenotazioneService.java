@@ -3,6 +3,7 @@ package com.Team2Java12.MechAppoint.servicies;
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
 import com.Team2Java12.MechAppoint.repositories.PrenotazioneRepository;

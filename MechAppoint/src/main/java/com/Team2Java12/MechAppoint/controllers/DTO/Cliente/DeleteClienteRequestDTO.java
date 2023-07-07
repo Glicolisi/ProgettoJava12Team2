@@ -1,6 +1,6 @@
-package com.Team2Java12.MechAppoint.controllers.DTO;
+package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-public class CreateOfficinaResponseDto extends BaseResponse {
+public class DeleteClienteRequestDTO {
     private Integer id;
 
     public Integer getId() {
