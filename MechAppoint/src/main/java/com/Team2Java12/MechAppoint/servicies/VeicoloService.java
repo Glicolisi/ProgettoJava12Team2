@@ -19,6 +19,7 @@ public class VeicoloService {
 
     public CreateVeicoloResponseDTO createVeicolo (CreateVeicoloRequestDTO createVeicoloRequest) {
         Optional<Veicolo> oVeicolo = veicoloRepository.findByTarga(createVeicoloRequest.getTarga());
+        //TODO: Restituire con try and catch forse baseResponse
         if (oVeicolo.isPresent()) {
             oVeicolo.orElseThrow(() -> new ConflictException());
         }

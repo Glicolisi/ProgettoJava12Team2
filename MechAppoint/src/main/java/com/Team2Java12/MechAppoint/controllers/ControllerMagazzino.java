@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 
 public class ControllerMagazzino {
-
+//TODO: Fare restcontroller con dto sia in entrata e risposta
     @Autowired
 
     private MagazzinoService magazzinoService;

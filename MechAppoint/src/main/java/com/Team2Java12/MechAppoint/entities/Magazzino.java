@@ -11,16 +11,17 @@ public class Magazzino {
     @Column(name="magazzinoid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer magazzinoid;
-    private String nomeOfficina;
+    private String nomeMagazzino;
     private Integer inventario;
     private ValidationEnum status;
 
     @OneToOne
     @JoinColumn(name="officinaid")
+
     private Officina officina;
 
     public Magazzino(String nomeOfficina, Integer inventario) {
-        this.nomeOfficina = nomeOfficina;
+        this.nomeMagazzino = nomeOfficina;
         this.inventario = inventario;
     }
 
@@ -37,11 +38,11 @@ public class Magazzino {
     }
 
     public String getNomeOfficina() {
-        return nomeOfficina;
+        return nomeMagazzino;
     }
 
     public void setNomeOfficina(String nomeOfficina) {
-        this.nomeOfficina = nomeOfficina;
+        this.nomeMagazzino = nomeOfficina;
     }
 
     public Integer getInventario() {

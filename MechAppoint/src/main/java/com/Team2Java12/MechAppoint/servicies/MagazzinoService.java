@@ -25,7 +25,7 @@ public class MagazzinoService {
 
     public void createMagazzino(CreateMagazzinoRequestDTO magazzinoDTO) {
         Magazzino magazzino = new Magazzino();
-        magazzino.setNomeOfficina(magazzinoDTO.getNomeOfficina());
+        magazzino.setNomeOfficina(magazzinoDTO.getNomeMagazzino());
         magazzino.setInventario(magazzinoDTO.getInventario());
         magazzino.setStatus(ValidationEnum.ACTIVE);
         magazzinoRepository.save(magazzino);

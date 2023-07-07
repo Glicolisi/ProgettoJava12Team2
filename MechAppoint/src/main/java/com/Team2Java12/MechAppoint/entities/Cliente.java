@@ -12,9 +12,8 @@ import java.util.List;
 @Table(name = "Clienti")
 public class Cliente {
     @Id
-    @Column (name = "Id")
+    @Column (name = "id")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String username;
     private String password;

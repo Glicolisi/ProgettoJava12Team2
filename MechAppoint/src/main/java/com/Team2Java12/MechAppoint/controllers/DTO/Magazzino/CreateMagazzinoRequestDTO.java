@@ -3,16 +3,17 @@ package com.Team2Java12.MechAppoint.controllers.DTO.Magazzino;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 
 public class CreateMagazzinoRequestDTO {
-    private String nomeOfficina;
+    private String nomeMagazzino;
     private Integer inventario;
+    private ValidationEnum validation = ValidationEnum.ACTIVE;
 
 
-    public String getNomeOfficina() {
-        return nomeOfficina;
+    public String getNomeMagazzino() {
+        return nomeMagazzino;
     }
 
-    public void setNomeOfficina(String nomeOfficina) {
-        this.nomeOfficina = nomeOfficina;
+    public void setNomeMagazzino(String nomeMagazzino) {
+        this.nomeMagazzino = nomeMagazzino;
     }
 
     public Integer getInventario() {
@@ -23,5 +24,11 @@ public class CreateMagazzinoRequestDTO {
         this.inventario = inventario;
     }
 
+    public ValidationEnum getValidation() {
+        return validation;
+    }
 
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
+    }
 }
