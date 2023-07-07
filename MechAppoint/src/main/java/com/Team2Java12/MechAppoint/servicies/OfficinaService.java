@@ -64,6 +64,7 @@ public class OfficinaService {
         officina.setNome(update.getNome());
         officina.setIndirizzo(update.getIndirizzo());
         officina.setEmail(update.getEmail());
+        officinaRepository.save(officina);
 
         return  new BaseResponse();
     }
