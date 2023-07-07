@@ -1,7 +1,7 @@
 package com.Team2Java12.MechAppoint.controllers;
 
 
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateMagazzinoRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
 import com.Team2Java12.MechAppoint.servicies.MagazzinoService;
@@ -19,31 +19,28 @@ public class ControllerMagazzino {
 
 
     @PostMapping("/postMagazzino")
-    public ResponseEntity<?> createMagazzino (@RequestBody CreateMagazzinoRequestDTO magazzinoDTO){
+    public ResponseEntity<?> createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
 
         magazzinoService.createMagazzino(magazzinoDTO);
         return ResponseEntity.ok().build();
 
     }
+
     @GetMapping("{magazzino_id}")
-    public ResponseEntity<Magazzino> retrieveMagazzino(@PathVariable("magazzino_id") Integer magazzinoid){
-
-        return ResponseEntity.ok(magazzinoService.getMagazzino(magazzinoid));
-
+    public GetMagazzinoDTO retriveMagazzino(@PathVariable("magazzino_id") Integer magazzinoId) {
+        return magazzinoService.getMagazzino(magazzinoId);
     }
 
     @PutMapping("/updateMagazzino")
 
-    public ResponseEntity<Magazzino>updateMagazzino(@RequestBody Magazzino magazzino, @PathVariable("magazzino_id") Integer magazzinoid){
-
-        magazzinoService.updateMagazzino(magazzino,magazzinoid);
-        return ResponseEntity.ok().build();
+    public BaseResponse updateMagazzino(@RequestBody UpdateMagazzinoRequestDTO magazzinoRequestDTO) {
+        return magazzinoService.updateMagazzino(magazzinoRequestDTO);
 
     }
+
     @DeleteMapping("/deleteMagazzino")
 
-    public ResponseEntity<Magazzino> deleteMagazzino (@PathVariable ("magazzino_id") Integer magazzinoid){
-        magazzinoService.deleteMagazzino(magazzinoid);
-        return ResponseEntity.ok().build();
+    public BaseResponse deleteMagazzino(@RequestBody DeletaMagazzinoRequestDTO deletaMagazzinoRequestDTO) {
+        return magazzinoService.deleteMagazzino(deletaMagazzinoRequestDTO);
     }
 }

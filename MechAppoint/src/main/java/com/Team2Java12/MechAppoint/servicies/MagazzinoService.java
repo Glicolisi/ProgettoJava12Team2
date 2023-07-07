@@ -1,7 +1,7 @@
 package com.Team2Java12.MechAppoint.servicies;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.CreateMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.GetMagazzinoDTO;
+import com.Team2Java12.MechAppoint.Exception.NotFoundException;
+import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
@@ -33,19 +33,37 @@ public class MagazzinoService {
         if (aMagazzino.isPresent()) {
             Magazzino magazzino = aMagazzino.get();
             GetMagazzinoDTO magazzinoDTO = new GetMagazzinoDTO();
-            magazzinoDTO.setNomeOfficina(magazzino.getNomeOfficina())
-            ;
+            magazzinoDTO.setNomeOfficina(magazzino.getNomeOfficina());
+            magazzinoDTO.getInventario(magazzino.getInventario());
+            return magazzinoDTO;
+        } else {
+            throw new NotFoundException("NOT_FOUD");
         }
-        return null;
+
     }
 
-    public void updateMagazzino(Magazzino magazzino, Integer magazzinoId) {
-        magazzinoRepository.deleteById(magazzinoId);
+    public BaseResponse updateMagazzino(UpdateMagazzinoRequestDTO updateMagazzinoRequestDTO) {
+        Optional<Magazzino> optionalMagazzino = magazzinoRepository.findById(updateMagazzinoRequestDTO.getId());
+        if (optionalMagazzino.isEmpty()) {
+            throw new RuntimeException();
+        }
+        Magazzino magazzino = optionalMagazzino.get();
+        magazzino.setNomeOfficina(updateMagazzinoRequestDTO.getNomeOfficina());
+        magazzino.setInventario(updateMagazzinoRequestDTO.getInventario());
         magazzinoRepository.save(magazzino);
+        return new BaseResponse();
     }
 
-    public void deleteMagazzino(Integer Id) {
-        magazzinoRepository.deleteById(Id);
+    public BaseResponse deleteMagazzino(DeletaMagazzinoRequestDTO deletaMagazzinoRequestDTO) {
+        Optional<Magazzino> optionalMagazzino = magazzinoRepository.findById(deletaMagazzinoRequestDTO.getId());
+        if (optionalMagazzino.isEmpty()) {
+            throw new RuntimeException();
+        }
+        Magazzino magazzino = optionalMagazzino.get();
+        magazzino.setStatus(ValidationEnum.DELETED);
+        magazzinoRepository.save(magazzino);
+
+        return new BaseResponse();
     }
 }
 

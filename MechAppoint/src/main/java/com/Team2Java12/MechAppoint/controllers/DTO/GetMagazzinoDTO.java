@@ -13,8 +13,8 @@ public class GetMagazzinoDTO {
         this.nomeOfficina = nomeOfficina;
     }
 
-    public Integer getInventario() {
-        return inventario;
+    public Integer getInventario(Integer inventario) {
+        return this.inventario;
     }
 
     public void setInventario(Integer inventario) {
