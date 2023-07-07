@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers.DTO;
 
-public class GetVeicoloDTO {
+public class GetVeicoloResponseDTO {
 
     private String tipoVeicolo;
     private String targa;
