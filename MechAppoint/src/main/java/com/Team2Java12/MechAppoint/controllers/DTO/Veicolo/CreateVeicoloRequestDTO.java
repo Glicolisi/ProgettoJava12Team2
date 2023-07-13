@@ -5,6 +5,15 @@ public class CreateVeicoloRequestDTO {
     private String targa;
     private String dataImmatricolazione;
     private String proprietario;
+    private Integer id_cliente;
+
+    public Integer getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(Integer id_cliente) {
+        this.id_cliente = id_cliente;
+    }
 
     public String getProprietario() {
         return proprietario;
