@@ -10,6 +10,17 @@ public class GetClienteResponseDTO extends BaseResponse {
     private Integer cellulare;
     private String validation = "ACTIVE";
 
+    public GetClienteResponseDTO(Integer id, String username, String password, String email, Integer cellulare, String validation) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.cellulare = cellulare;
+        this.validation = validation;
+    }
+
+    public GetClienteResponseDTO() {
+    }
 
     public String getUsername() {
         return username;
