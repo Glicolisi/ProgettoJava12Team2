@@ -9,8 +9,10 @@ import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.UpdateMagazzinoRequ
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
+import com.Team2Java12.MechAppoint.entities.Officina;
 import com.Team2Java12.MechAppoint.repositories.MagazzinoRepository;
 
+import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +24,20 @@ public class MagazzinoService {
 
     @Autowired
     private MagazzinoRepository magazzinoRepository;
+    @Autowired
+    private OfficinaRepository officinaRepository;
 
-    public void createMagazzino(CreateMagazzinoRequestDTO magazzinoDTO) {
+    public BaseResponse createMagazzino(CreateMagazzinoRequestDTO magazzinoDTO) {
         Magazzino magazzino = new Magazzino();
-        magazzino.setNomeOfficina(magazzinoDTO.getNomeMagazzino());
+        magazzino.setNomeMagazzino(magazzinoDTO.getNomeMagazzino());
         magazzino.setInventario(magazzinoDTO.getInventario());
         magazzino.setStatus(ValidationEnum.ACTIVE);
+        Optional<Officina> Oofficina = officinaRepository.findById(magazzinoDTO.getOfficinaId());
+        Officina officina = Oofficina.get();
+        magazzino.setOfficina(officina);
         magazzinoRepository.save(magazzino);
+        BaseResponse baseResponse = new BaseResponse();
+        return baseResponse;
     }
 
     public GetMagazzinoDTO getMagazzino(Integer magazzinoId) {
@@ -37,7 +46,7 @@ public class MagazzinoService {
         if (aMagazzino.isPresent()) {
             Magazzino magazzino = aMagazzino.get();
             GetMagazzinoDTO magazzinoDTO = new GetMagazzinoDTO();
-            magazzinoDTO.setNomeOfficina(magazzino.getNomeOfficina());
+            magazzinoDTO.setNomeOfficina(magazzino.getNomeMagazzino());
             magazzinoDTO.getInventario(magazzino.getInventario());
             return magazzinoDTO;
         } else {
@@ -52,7 +61,7 @@ public class MagazzinoService {
             throw new RuntimeException();
         }
         Magazzino magazzino = optionalMagazzino.get();
-        magazzino.setNomeOfficina(updateMagazzinoRequestDTO.getNomeOfficina());
+        magazzino.setNomeMagazzino(updateMagazzinoRequestDTO.getNomeOfficina());
         magazzino.setInventario(updateMagazzinoRequestDTO.getInventario());
         magazzinoRepository.save(magazzino);
         return new BaseResponse();

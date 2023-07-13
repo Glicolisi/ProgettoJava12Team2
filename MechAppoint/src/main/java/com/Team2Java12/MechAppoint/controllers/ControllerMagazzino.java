@@ -22,10 +22,10 @@ public class ControllerMagazzino {
 
 
     @PostMapping("/postMagazzino")
-    public ResponseEntity<?> createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
+    public BaseResponse createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
 
-        magazzinoService.createMagazzino(magazzinoDTO);
-        return ResponseEntity.ok().build();
+        return magazzinoService.createMagazzino(magazzinoDTO);
+
 
     }
 

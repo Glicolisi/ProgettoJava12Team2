@@ -20,8 +20,8 @@ public class Magazzino {
 
     private Officina officina;
 
-    public Magazzino(String nomeOfficina, Integer inventario) {
-        this.nomeMagazzino = nomeOfficina;
+    public Magazzino(String nomeMagazzino, Integer inventario) {
+        this.nomeMagazzino = nomeMagazzino;
         this.inventario = inventario;
     }
 
@@ -37,12 +37,12 @@ public class Magazzino {
         this.magazzinoid = id;
     }
 
-    public String getNomeOfficina() {
+    public String getNomeMagazzino() {
         return nomeMagazzino;
     }
 
-    public void setNomeOfficina(String nomeOfficina) {
-        this.nomeMagazzino = nomeOfficina;
+    public void setNomeMagazzino(String nomeMagazzino) {
+        this.nomeMagazzino = nomeMagazzino;
     }
 
     public Integer getInventario() {
@@ -59,5 +59,21 @@ public class Magazzino {
 
     public void setStatus(ValidationEnum status) {
         this.status = status;
+    }
+
+    public Integer getMagazzinoid() {
+        return magazzinoid;
+    }
+
+    public void setMagazzinoid(Integer magazzinoid) {
+        this.magazzinoid = magazzinoid;
+    }
+
+    public Officina getOfficina() {
+        return officina;
+    }
+
+    public void setOfficina(Officina officina) {
+        this.officina = officina;
     }
 }
