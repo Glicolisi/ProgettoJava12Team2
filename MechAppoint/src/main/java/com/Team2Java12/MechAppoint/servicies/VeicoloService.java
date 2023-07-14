@@ -5,7 +5,9 @@ import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.entities.Veicolo;
+import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.VeicoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,18 +18,23 @@ import java.util.Optional;
 public class VeicoloService {
     @Autowired
     private VeicoloRepository veicoloRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     public CreateVeicoloResponseDTO createVeicolo (CreateVeicoloRequestDTO createVeicoloRequest) {
         Optional<Veicolo> oVeicolo = veicoloRepository.findByTarga(createVeicoloRequest.getTarga());
+        Optional<Cliente> oCliente = clienteRepository.findById(createVeicoloRequest.getId_cliente());
         //TODO: Restituire con try and catch forse baseResponse
         if (oVeicolo.isPresent()) {
             oVeicolo.orElseThrow(() -> new ConflictException());
         }
         Veicolo veicolo = new Veicolo();
+        Cliente cliente = oCliente.get();
         veicolo.setTipoVeicolo(createVeicoloRequest.getTipoVeicolo());
         veicolo.setDataImmatricolazione(createVeicoloRequest.getDataImmatricolazione());
         veicolo.setTarga(createVeicoloRequest.getTarga());
         veicolo.setProprietario(createVeicoloRequest.getProprietario());
+        veicolo.setCliente(cliente);
         veicolo.setStatus(ValidationEnum.ACTIVE);
         veicoloRepository.save(veicolo);
         CreateVeicoloResponseDTO createVeicoloResponse = new CreateVeicoloResponseDTO();

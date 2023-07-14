@@ -21,6 +21,7 @@ public class Cliente {
     private Integer cellulare;
     private ValidationEnum validation;
 
+
     public Cliente(Integer id ,String username, String password, String email, Integer cellulare, ValidationEnum validation) {
         this.id = id;
         this.username = username;
