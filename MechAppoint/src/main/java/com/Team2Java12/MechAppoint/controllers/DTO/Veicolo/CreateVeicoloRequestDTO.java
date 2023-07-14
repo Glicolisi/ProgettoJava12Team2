@@ -1,11 +1,22 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Veicolo;
 
+import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+
 public class CreateVeicoloRequestDTO {
     private String tipoVeicolo;
     private String targa;
     private String dataImmatricolazione;
-    private String proprietario;
     private Integer id_cliente;
+
+    private ValidationEnum validation = ValidationEnum.ACTIVE;
+
+    public ValidationEnum getValidation() {
+        return validation;
+    }
+
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
+    }
 
     public Integer getId_cliente() {
         return id_cliente;
@@ -13,14 +24,6 @@ public class CreateVeicoloRequestDTO {
 
     public void setId_cliente(Integer id_cliente) {
         this.id_cliente = id_cliente;
-    }
-
-    public String getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
     }
 
     public String getTipoVeicolo() {

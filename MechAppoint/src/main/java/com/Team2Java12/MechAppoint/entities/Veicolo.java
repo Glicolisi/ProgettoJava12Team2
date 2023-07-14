@@ -16,7 +16,7 @@ public class Veicolo {
     private String targa;
     private String dataImmatricolazione;
     private String proprietario;
-    private ValidationEnum status;
+    private ValidationEnum validation;
 
     public Veicolo(Integer id, String tipoVeicolo, String targa, String dataImmatricolazione, String proprietario) {
         this.id = id;
@@ -81,11 +81,11 @@ public class Veicolo {
         this.dataImmatricolazione = dataImmatricolazione;
     }
 
-    public ValidationEnum getStatus() {
-        return status;
+    public ValidationEnum getValidation() {
+        return validation;
     }
 
-    public void setStatus(ValidationEnum status) {
-        this.status = status;
+    public void setValidation(ValidationEnum validation) {
+        this.validation = validation;
     }
 }
