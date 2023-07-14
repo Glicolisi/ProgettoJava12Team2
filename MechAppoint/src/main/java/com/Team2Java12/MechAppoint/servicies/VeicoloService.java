@@ -24,7 +24,6 @@ public class VeicoloService {
     public CreateVeicoloResponseDTO createVeicolo (CreateVeicoloRequestDTO createVeicoloRequest) {
         Optional<Veicolo> oVeicolo = veicoloRepository.findByTarga(createVeicoloRequest.getTarga());
         Optional<Cliente> oCliente = clienteRepository.findById(createVeicoloRequest.getId_cliente());
-        //TODO: Restituire con try and catch forse baseResponse
         if (oVeicolo.isPresent()) {
             oVeicolo.orElseThrow(() -> new ConflictException());
         }
@@ -33,9 +32,8 @@ public class VeicoloService {
         veicolo.setTipoVeicolo(createVeicoloRequest.getTipoVeicolo());
         veicolo.setDataImmatricolazione(createVeicoloRequest.getDataImmatricolazione());
         veicolo.setTarga(createVeicoloRequest.getTarga());
-        veicolo.setProprietario(createVeicoloRequest.getProprietario());
         veicolo.setCliente(cliente);
-        veicolo.setStatus(ValidationEnum.ACTIVE);
+        veicolo.setValidation(createVeicoloRequest.getValidation());
         veicoloRepository.save(veicolo);
         CreateVeicoloResponseDTO createVeicoloResponse = new CreateVeicoloResponseDTO();
         createVeicoloResponse.setId(veicolo.getId());
@@ -63,6 +61,7 @@ public class VeicoloService {
             getVeicoloResponse.setTarga(veicolo.getTarga());
             getVeicoloResponse.setDataImmatricolazione(veicolo.getDataImmatricolazione());
             getVeicoloResponse.setProprietario(veicolo.getCliente().getUsername());
+            getVeicoloResponse.setValidation(veicolo.getValidation());
             return getVeicoloResponse;
     }
 
@@ -86,7 +85,7 @@ public class VeicoloService {
             throw new NotFoundException("Oggetto inesistente");
         }
         Veicolo veicolo = oVeicolo.get();
-        veicolo.setStatus(ValidationEnum.DELETED);
+        veicolo.setValidation(ValidationEnum.DELETED);
         veicoloRepository.save(veicolo);
         return new BaseResponse();
     }
