@@ -21,7 +21,9 @@ public class PrenotazioneService {
     public CreatePrenotazioneResponseDto createPrenotazione (CreatePrenotazioneRequestDto request) {
 
         Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(request.getNomeCliente());
-        optionalPrenotazione.orElseThrow(() -> new ConflictException());
+        if (optionalPrenotazione.isPresent()) {
+            optionalPrenotazione.orElseThrow(() -> new ConflictException());
+        }
         Prenotazione prenotazione = new Prenotazione(request.getNomeCliente(), request.getData(), request.getOrario(), request.getValidation());
         prenotazione = prenotazioneRepository.save(prenotazione);
         CreatePrenotazioneResponseDto createPrenotazioneResponseDto = new CreatePrenotazioneResponseDto();
