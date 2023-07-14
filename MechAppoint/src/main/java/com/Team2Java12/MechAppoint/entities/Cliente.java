@@ -12,15 +12,15 @@ import java.util.List;
 @Table(name = "Clienti")
 public class Cliente {
     @Id
-    @Column (name = "Id")
+    @Column (name = "id")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String username;
     private String password;
     private String email;
     private Integer cellulare;
     private ValidationEnum validation;
+
 
     public Cliente(Integer id ,String username, String password, String email, Integer cellulare, ValidationEnum validation) {
         this.id = id;

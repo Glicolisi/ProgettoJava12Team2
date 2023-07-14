@@ -11,16 +11,17 @@ public class Magazzino {
     @Column(name="magazzinoid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer magazzinoid;
-    private String nomeOfficina;
+    private String nomeMagazzino;
     private Integer inventario;
     private ValidationEnum status;
 
     @OneToOne
     @JoinColumn(name="officinaid")
+
     private Officina officina;
 
-    public Magazzino(String nomeOfficina, Integer inventario) {
-        this.nomeOfficina = nomeOfficina;
+    public Magazzino(String nomeMagazzino, Integer inventario) {
+        this.nomeMagazzino = nomeMagazzino;
         this.inventario = inventario;
     }
 
@@ -36,12 +37,12 @@ public class Magazzino {
         this.magazzinoid = id;
     }
 
-    public String getNomeOfficina() {
-        return nomeOfficina;
+    public String getNomeMagazzino() {
+        return nomeMagazzino;
     }
 
-    public void setNomeOfficina(String nomeOfficina) {
-        this.nomeOfficina = nomeOfficina;
+    public void setNomeMagazzino(String nomeMagazzino) {
+        this.nomeMagazzino = nomeMagazzino;
     }
 
     public Integer getInventario() {
@@ -58,5 +59,21 @@ public class Magazzino {
 
     public void setStatus(ValidationEnum status) {
         this.status = status;
+    }
+
+    public Integer getMagazzinoid() {
+        return magazzinoid;
+    }
+
+    public void setMagazzinoid(Integer magazzinoid) {
+        this.magazzinoid = magazzinoid;
+    }
+
+    public Officina getOfficina() {
+        return officina;
+    }
+
+    public void setOfficina(Officina officina) {
+        this.officina = officina;
     }
 }

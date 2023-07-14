@@ -5,43 +5,42 @@ import com.Team2Java12.MechAppoint.controllers.DTO.*;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.CreateMagazzinoRequestDTO;
 import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.DeleteMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoRequestDTO;
 import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.UpdateMagazzinoRequestDTO;
 import com.Team2Java12.MechAppoint.servicies.MagazzinoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 
 public class ControllerMagazzino {
-
     @Autowired
 
     private MagazzinoService magazzinoService;
 
 
-    @PostMapping("/postMagazzino")
-    public ResponseEntity<?> createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
+    @PostMapping("/magazzino/create")
+    public BaseResponse createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
 
-        magazzinoService.createMagazzino(magazzinoDTO);
-        return ResponseEntity.ok().build();
+        return magazzinoService.createMagazzino(magazzinoDTO);
+
 
     }
 
-    @GetMapping("{magazzino_id}")
-    public GetMagazzinoDTO retriveMagazzino(@PathVariable("magazzino_id") Integer magazzinoId) {
-        return magazzinoService.getMagazzino(magazzinoId);
+    @GetMapping("/magazzino/get")
+    public GetMagazzinoRequestDTO getMagazzino(@RequestBody GetMagazzinoRequestDTO get) {
+        return magazzinoService.getMagazzino(get);
     }
 
-    @PutMapping("/updateMagazzino")
+    @PutMapping("/magazzino/put")
 
     public BaseResponse updateMagazzino(@RequestBody UpdateMagazzinoRequestDTO magazzinoRequestDTO) {
-        return magazzinoService.updateMagazzino(magazzinoRequestDTO);
+        magazzinoService.updateMagazzino(magazzinoRequestDTO);
+        return new BaseResponse();
 
     }
 
-    @DeleteMapping("/deleteMagazzino")
+    @DeleteMapping("/magazzino/delete")
 
     public BaseResponse deleteMagazzino(@RequestBody DeleteMagazzinoRequestDTO deleteMagazzinoRequestDTO) {
         return magazzinoService.deleteMagazzino(deleteMagazzinoRequestDTO);

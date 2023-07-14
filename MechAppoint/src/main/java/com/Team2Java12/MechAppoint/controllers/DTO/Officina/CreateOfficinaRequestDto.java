@@ -1,12 +1,16 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
 
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.entities.Cliente;
+
+import java.util.List;
 
 public class CreateOfficinaRequestDto {
 
     private String nome;
     private String indirizzo;
     private String email;
+    private List<Integer> clienteIdList;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
 
     public String getNome() {
@@ -31,6 +35,14 @@ public class CreateOfficinaRequestDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Integer> getClienteIdList() {
+        return clienteIdList;
+    }
+
+    public void setClienteIdList(List<Integer> clienteIdList) {
+        this.clienteIdList = clienteIdList;
     }
 
     public ValidationEnum getValidation() {
