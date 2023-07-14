@@ -1,9 +1,9 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Magazzino;
 
-public class UpdateMagazzinoRequestDTO {
+public class GetMagazzinoRequestDTO {
     private String nomeMagazzino;
-    private Integer inventario;
-    private  Integer id;
+    private Integer id;
+
 
     public String getNomeMagazzino() {
         return nomeMagazzino;
@@ -11,14 +11,6 @@ public class UpdateMagazzinoRequestDTO {
 
     public void setNomeMagazzino(String nomeMagazzino) {
         this.nomeMagazzino = nomeMagazzino;
-    }
-
-    public Integer getInventario() {
-        return inventario;
-    }
-
-    public void setInventario(Integer inventario) {
-        this.inventario = inventario;
     }
 
     public Integer getId() {
