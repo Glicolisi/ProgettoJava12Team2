@@ -8,6 +8,15 @@ public class CreatePrenotazioneRequestDto {
     private String data;
     private String orario;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
+    private Integer officinaid;
+
+    public Integer getOfficinaid() {
+        return officinaid;
+    }
+
+    public void setOfficinaid(Integer officinaid) {
+        this.officinaid = officinaid;
+    }
 
     public String getNomeCliente() {
         return nomeCliente;
