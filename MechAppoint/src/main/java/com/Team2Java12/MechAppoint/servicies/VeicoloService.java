@@ -25,7 +25,7 @@ public class VeicoloService {
         Optional<Veicolo> oVeicolo = veicoloRepository.findByTarga(createVeicoloRequest.getTarga());
         Optional<Cliente> oCliente = clienteRepository.findById(createVeicoloRequest.getId_cliente());
         if (oVeicolo.isPresent()) {
-            oVeicolo.orElseThrow(() -> new ConflictException());
+            oVeicolo.orElseThrow(() -> new ConflictException("L'oggetto è gia stato creato"));
         }
         Veicolo veicolo = new Veicolo();
         Cliente cliente = oCliente.get();

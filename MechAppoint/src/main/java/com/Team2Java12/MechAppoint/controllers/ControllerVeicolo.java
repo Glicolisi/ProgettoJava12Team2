@@ -12,24 +12,24 @@ public class ControllerVeicolo {
     @Autowired
     private VeicoloService veicoloService;
 
-    @PostMapping ("/createVeicolo")
+    @PostMapping ("/veicolo/create")
     public CreateVeicoloResponseDTO createVeicolo (@RequestBody CreateVeicoloRequestDTO createVeicoloRequest) {
 
         return veicoloService.createVeicolo(createVeicoloRequest);
     }
 
-    @GetMapping ("/retriveVeicolo")
+    @GetMapping ("/veicolo/get")
     public GetVeicoloResponseDTO retriveVeicolo (@RequestBody GetVeicoloRequestDTO getVeicoloRequest){
         return veicoloService.getVeicolo(getVeicoloRequest);
     }
 
 
-    @PutMapping("/updateVeicolo")
+    @PutMapping("/veicolo/put")
     public BaseResponse updateVeicolo(@RequestBody UpdateVeicoloRequestDTO updateVeicoloRequest){
         return veicoloService.updateVeicolo(updateVeicoloRequest);
     }
 
-    @DeleteMapping("/deleteVeicolo")
+    @DeleteMapping("/veicolo/delete")
     public BaseResponse deleteVeicolo(@RequestBody DeleteVeicoloRequestDTO deleteVeicoloRequest) {
         return veicoloService.deleteVeicolo(deleteVeicoloRequest);
     }
