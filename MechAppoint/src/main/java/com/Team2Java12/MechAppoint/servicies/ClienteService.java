@@ -20,7 +20,7 @@ public class ClienteService {
     public CreateClienteResponseDTO createCliente(CreateClienteRequestDTO request) {
         Optional<Cliente> cliente = clienteRepository.findByUsername(request.getUsername());
         if (cliente.isPresent()) {
-            throw new ConflictException();
+            throw new ConflictException("Username già esistente");
         }
         Cliente cliente1 = new Cliente(request.getUsername(), request.getPassword(), request.getEmail(), request.getCellulare(), request.getValidation());
         cliente1 = clienteRepository.save(cliente1);
