@@ -5,12 +5,15 @@ import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.entities.Officina;
+import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +22,8 @@ public class OfficinaService {
 
     @Autowired
     private OfficinaRepository officinaRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Value("${app.feature.enablephysicaldeletion}")
     private boolean enablephysicaldeletion;
@@ -27,10 +32,11 @@ public class OfficinaService {
 
        Optional<Officina> optionalOfficina = officinaRepository.findByNome(request.getNome());
        if(optionalOfficina.isPresent()){
-           optionalOfficina.orElseThrow(() -> new ConflictException());
-
+           optionalOfficina.orElseThrow(() -> new ConflictException("L'oggetto è gia stato creato"));
        }
+       List<Cliente> clienteList = clienteRepository.findAllById(request.getClienteIdList());
        Officina officina = new Officina(request.getNome(), request.getIndirizzo(), request.getEmail(), request.getValidation());
+       officina.setClienti(clienteList);
        officina=officinaRepository.save(officina);
        CreateOfficinaResponseDto createOfficinaResponseDto = new CreateOfficinaResponseDto();
        createOfficinaResponseDto.setId(officina.getOfficinaid());
@@ -60,7 +66,6 @@ public class OfficinaService {
     public BaseResponse updateOfficina(UpdateOfficinaRequestDto update){
 
         Optional<Officina> optionalOfficina = officinaRepository.findByNome(update.getNome());
-        optionalOfficina.orElseThrow(() -> new ConflictException());
         Officina officina = optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
         officina.setNome(update.getNome());
         officina.setIndirizzo(update.getIndirizzo());
