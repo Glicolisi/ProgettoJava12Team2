@@ -1,7 +1,7 @@
 package com.Team2Java12.MechAppoint.controllers;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteResponseDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
+import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.*;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.servicies.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +11,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ControllerCliente {
     private ClienteService clientiService;
+
     @Autowired
     public ControllerCliente(ClienteService clientiService) {
         this.clientiService = clientiService;
     }
 
-    @PostMapping("/postCliente")
-    public CreateClienteResponseDTO createCliente(@RequestBody CreateClienteRequestDTO cliente) {
-        return  clientiService.createCliente(cliente);
+    @PostMapping("/cliente/post")
+    public CreateClienteResponseDTO createCliente(@RequestBody CreateClienteRequestDTO request) {
+        return clientiService.createCliente(request);
     }
 
-    @GetMapping ("{ClienteId}")
-    public ResponseEntity<Cliente> getCliente (@PathVariable ("ClientiId") Integer Id) {
-        return ResponseEntity.ok(clientiService.getCliente(Id));
+    @GetMapping("/cliente/get")
+    public GetClienteResponseDTO getCliente(@RequestBody GetClienteRequestDTO request) {
+        return clientiService.getCliente(request);
     }
 
-    @PutMapping ({"ClienteId"})
-    public ResponseEntity<?> putCliente (@RequestBody Cliente cliente, @PathVariable ("ClientiId") Integer Id) {
-        clientiService.updateCliente(cliente, Id);
-        return ResponseEntity.ok().build();
+    @PutMapping("/cliente/put")
+    public BaseResponse putCliente(@RequestBody UpdateClienteRequestDTO request) {
+        return clientiService.updateCliente(request);
+
     }
 
-    @DeleteMapping ("{ClienteId}")
-    public ResponseEntity<?> deleteCliente (@PathVariable ("ClientiId") Integer Id) {
-        clientiService.deleteCliente(Id);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/cliente/delete")
+    public BaseResponse deleteCliente(@RequestBody DeleteClienteRequestDTO request) {
+        return clientiService.deleteCliente(request);
+
     }
 }
