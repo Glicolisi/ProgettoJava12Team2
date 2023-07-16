@@ -9,6 +9,7 @@ public class CreatePrenotazioneRequestDto {
     private String orario;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
     private Integer officinaid;
+    private Integer clienteId;
 
     public Integer getOfficinaid() {
         return officinaid;
@@ -48,5 +49,13 @@ public class CreatePrenotazioneRequestDto {
 
     public void setValidation(ValidationEnum validation) {
         this.validation = validation;
+    }
+
+    public Integer getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Integer clienteId) {
+        this.clienteId = clienteId;
     }
 }

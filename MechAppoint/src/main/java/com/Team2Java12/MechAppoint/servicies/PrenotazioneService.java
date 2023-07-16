@@ -5,8 +5,10 @@ import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.entities.Officina;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
+import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import com.Team2Java12.MechAppoint.repositories.PrenotazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,12 @@ public class PrenotazioneService {
     private PrenotazioneRepository prenotazioneRepository;
     @Autowired
     private OfficinaRepository officinaRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     public CreatePrenotazioneResponseDto createPrenotazione (CreatePrenotazioneRequestDto request) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(request.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNomeCliente(request.getNomeCliente());
         if (optionalPrenotazione.isPresent()) {
             optionalPrenotazione.orElseThrow(() -> new ConflictException("Errore nella creazione della prenotazione"));
         }
@@ -32,9 +36,16 @@ public class PrenotazioneService {
         if (oOfficina.isEmpty()) {
             throw new ConflictException("id officina non trovato");
         }
+        Optional<Cliente>oCliente = clienteRepository.findById(request.getClienteId());
+        if (oCliente.isEmpty()) {
+            throw new ConflictException("id cliente non trovato");
+        }
+
         Officina officina=oOfficina.get();
+        Cliente cliente= oCliente.get();
         Prenotazione prenotazione = new Prenotazione(request.getNomeCliente(), request.getData(), request.getOrario(), request.getValidation());
         prenotazione.setOfficina(officina);
+        prenotazione.setCliente(cliente);
         prenotazione = prenotazioneRepository.save(prenotazione);
         CreatePrenotazioneResponseDto createPrenotazioneResponseDto = new CreatePrenotazioneResponseDto();
         createPrenotazioneResponseDto.setId(prenotazione.getId());
@@ -60,7 +71,7 @@ public class PrenotazioneService {
 
     public BaseResponse updatePrenotazione(UpdatePrenotazioneRequestDto updatePrenotazione) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findBynomeCliente(updatePrenotazione.getNomeCliente());
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNomeCliente(updatePrenotazione.getNomeCliente());
         optionalPrenotazione.orElseThrow(() -> new ConflictException("Errore nell'update della prenotazione"));
         Prenotazione prenotazione = optionalPrenotazione.orElseThrow(() -> new NotFoundException("Errore, non sono stati trovati i parametri"));
         prenotazione.setNomeCliente(updatePrenotazione.getNomeCliente());

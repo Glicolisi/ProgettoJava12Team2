@@ -4,18 +4,31 @@ import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.GetPrenotazioneResponseDto;
+import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.GetVeicoloResponseDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
+import com.Team2Java12.MechAppoint.entities.Prenotazione;
+import com.Team2Java12.MechAppoint.entities.Veicolo;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
+import com.Team2Java12.MechAppoint.repositories.PrenotazioneRepository;
+import com.Team2Java12.MechAppoint.repositories.VeicoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private VeicoloRepository veicoloRepository;
+    @Autowired
+    private PrenotazioneRepository prenotazioneRepository;
 
     public CreateClienteResponseDTO createCliente(CreateClienteRequestDTO request) {
         Optional<Cliente> cliente = clienteRepository.findByUsername(request.getUsername());
@@ -29,7 +42,6 @@ public class ClienteService {
         response.setStatus(ValidationEnum.OK);
         return response;
     }
-
     public GetClienteResponseDTO getCliente(GetClienteRequestDTO get) {
         if (get == null) {
             throw new NotFoundException("Valore non inserito");
@@ -37,6 +49,61 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(get.getId()).orElseThrow(() -> new NotFoundException("Id non trovato"));
 
         return new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare(), cliente.getValidation().getStatus());
+    }
+    public GetClienteCompletoResponseDTO getClienteCompleto (Integer clienteId){
+        if (clienteId == null) {
+            throw new NotFoundException("Valore non inserito");
+        }
+        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new NotFoundException("Id cliente non trovato"));
+        GetClienteResponseDTO clienteResponseDTO = new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare(), cliente.getValidation().getStatus());
+
+        List<GetVeicoloResponseDTO> veicoli =new ArrayList<>();
+        for (Veicolo veicolo : cliente.getVeicoli()) {
+            GetVeicoloResponseDTO veicoloDTO = new GetVeicoloResponseDTO();
+            veicoloDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
+            veicoloDTO.setProprietario(veicolo.getProprietario());
+            veicoloDTO.setTarga(veicolo.getTarga());
+            veicoloDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
+            veicoloDTO.setValidation(veicolo.getValidation());
+            veicoli.add(veicoloDTO);
+        }
+
+        List<GetPrenotazioneResponseDto> prenotazioni = new ArrayList<>();
+        /*cliente.getPrenotazioni().stream().map(prenotazione ->
+                new GetPrenotazioneResponseDto(prenotazione.getId(),
+                        prenotazione.getNomeCliente(),
+                        prenotazione.getData(),
+                        prenotazione.getOrario(),
+                        prenotazione.getValidation())).forEach(prenotazioni::add);*/
+        for (Prenotazione prenotazione : cliente.getPrenotazioni()) {
+            GetPrenotazioneResponseDto prenotazioneDTO = new GetPrenotazioneResponseDto();
+            prenotazioneDTO.setId(prenotazione.getId());
+            prenotazioneDTO.setNomeCliente(prenotazione.getNomeCliente());
+            prenotazioneDTO.setData(prenotazione.getData());
+            prenotazioneDTO.setOrario(prenotazione.getOrario());
+            prenotazioneDTO.setValidation(prenotazione.getValidation());
+            prenotazioni.add(prenotazioneDTO);
+        }
+
+
+        GetClienteCompletoResponseDTO response = new GetClienteCompletoResponseDTO();
+        response.setCliente(clienteResponseDTO);
+        response.setVeicoli(veicoli);
+        response.setPrenotazioni(prenotazioni);
+        return response;
+    }
+    public List<GetClienteResponseDTO> getAllClienti() {
+        List<Cliente> clienti = clienteRepository.findAll();
+        List<GetClienteResponseDTO> response = new ArrayList<>();
+        for (Cliente cliente : clienti) {
+            response.add(new GetClienteResponseDTO(cliente.getId(),
+                    cliente.getUsername(),
+                    cliente.getPassword(),
+                    cliente.getEmail(), cliente.getCellulare(),
+                    cliente.getValidation().getStatus()));
+        }
+
+        return response;
     }
 
     public BaseResponse updateCliente(UpdateClienteRequestDTO update) {
