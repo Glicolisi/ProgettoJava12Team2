@@ -18,6 +18,8 @@ public class GetPrenotazioneResponseDto extends BaseResponse {
         this.orario = orario;
         this.validation = validation;
     }
+    public GetPrenotazioneResponseDto() {
+    }
 
     public Integer getId() {
         return id;

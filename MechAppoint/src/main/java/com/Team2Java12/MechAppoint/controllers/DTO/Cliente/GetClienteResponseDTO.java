@@ -1,6 +1,9 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
+import com.Team2Java12.MechAppoint.entities.Cliente;
+
+import java.util.List;
 
 public class GetClienteResponseDTO extends BaseResponse {
     private Integer id;

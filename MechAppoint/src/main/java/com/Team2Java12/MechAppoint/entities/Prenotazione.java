@@ -34,8 +34,12 @@ public class Prenotazione {
     }
 
     @ManyToOne
-    @JoinColumn(name ="officinaid")
+    @JoinColumn(name ="officina_id")
     private Officina officina;
+
+    @ManyToOne
+    @JoinColumn(name ="cliente_id")
+    private Cliente cliente;
 
     public Prenotazione(String nomeCliente, String data, String orario, ValidationEnum validation) {
         this.nomeCliente = nomeCliente;
@@ -93,5 +97,13 @@ public class Prenotazione {
 
     public void setOrario(String orario) {
         this.orario = orario;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

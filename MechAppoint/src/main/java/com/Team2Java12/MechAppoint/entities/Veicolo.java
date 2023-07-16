@@ -30,7 +30,7 @@ public class Veicolo {
     }
 
     @ManyToOne
-    @JoinColumn(name = "Id")
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public String getProprietario() {
