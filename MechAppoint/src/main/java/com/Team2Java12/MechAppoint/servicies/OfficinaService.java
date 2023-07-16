@@ -29,6 +29,8 @@ public class OfficinaService {
     @Value("${app.feature.enablephysicaldeletion}")
     private boolean enablephysicaldeletion;
 
+    //TODO:Gestire relazione Prenotazione-Cliente
+
     public CreateOfficinaResponseDto createOfficina (CreateOfficinaRequestDto request){
 
        Optional<Officina> optionalOfficina = officinaRepository.findByNome(request.getNome());
@@ -43,7 +45,7 @@ public class OfficinaService {
        createOfficinaResponseDto.setId(officina.getOfficinaid());
        createOfficinaResponseDto.setStatus(ValidationEnum.OK);
        return createOfficinaResponseDto;
-
+       //TODO: togliere la relazione con clienti da qui e inserirla in un get
     }
 
 
@@ -70,7 +72,7 @@ public class OfficinaService {
 
         Optional<Officina> optionalOfficina = officinaRepository.findByNome(update.getNome());
         Officina officina = optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
-        officina.setNome(update.getNome());
+        officina.setNome(update.getNomeSostituto());
         officina.setIndirizzo(update.getIndirizzo());
         officina.setEmail(update.getEmail());
         officinaRepository.save(officina);
