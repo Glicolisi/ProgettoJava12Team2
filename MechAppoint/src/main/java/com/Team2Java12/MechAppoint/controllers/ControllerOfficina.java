@@ -20,15 +20,14 @@ public class ControllerOfficina {
         return officinaService.createOfficina(request);
 
     }
+
     @GetMapping("/officina/get")
-    public GetOfficinaResponseDto getOfficina(@RequestBody GetOfficinaRequestDto get){
+    public GetOfficinaResponseDto getOfficina(@io.swagger.v3.oas.annotations.parameters.RequestBody GetOfficinaRequestDto get){
 
-      return officinaService.getOfficina(get);
-
+        return officinaService.getOfficina(get);
     }
 
     @PutMapping("/officina/put")
-
     public BaseResponse updateOfficina(@RequestBody UpdateOfficinaRequestDto update) {
 
         officinaService.updateOfficina(update);

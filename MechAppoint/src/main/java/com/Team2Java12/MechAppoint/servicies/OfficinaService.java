@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
+import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
@@ -54,8 +55,10 @@ public class OfficinaService {
             optionalOfficina=officinaRepository.findById(get.getId());
         } else if (get.getId() == null) {
            optionalOfficina=officinaRepository.findByNome(get.getNome());
-        } else {
+        } else if (!(get.getNome().isEmpty() && get.getId() == null)){
             optionalOfficina=officinaRepository.findById(get.getId());
+        } else{
+            throw new NotExistsException("Non esiste il campo richiesto");
         }
 
         Officina officina= optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
