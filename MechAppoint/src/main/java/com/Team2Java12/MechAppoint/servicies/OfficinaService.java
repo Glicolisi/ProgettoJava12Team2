@@ -37,15 +37,13 @@ public class OfficinaService {
        if(optionalOfficina.isPresent()){
            optionalOfficina.orElseThrow(() -> new ConflictException("L'oggetto è gia stato creato"));
        }
-       List<Cliente> clienteList = clienteRepository.findAllById(request.getClienteIdList());
        Officina officina = new Officina(request.getNome(), request.getIndirizzo(), request.getEmail(), request.getValidation());
-       officina.setClienti(clienteList);
        officina=officinaRepository.save(officina);
        CreateOfficinaResponseDto createOfficinaResponseDto = new CreateOfficinaResponseDto();
        createOfficinaResponseDto.setId(officina.getOfficinaid());
        createOfficinaResponseDto.setStatus(ValidationEnum.OK);
        return createOfficinaResponseDto;
-       //TODO: togliere la relazione con clienti da qui e inserirla in un get
+
     }
 
 

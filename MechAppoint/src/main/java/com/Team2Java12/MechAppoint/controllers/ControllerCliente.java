@@ -43,6 +43,11 @@ public class ControllerCliente {
 
     }
 
+    @PutMapping("/cliente/setClienteprenotazione")
+    public BaseResponse setClienteprenotazione(@RequestBody SetClienteRequestDto set){
+        return clientiService.setClienteprenotazione(set);
+    }
+
     @DeleteMapping("/cliente/delete")
     public BaseResponse deleteCliente(@RequestBody DeleteClienteRequestDTO request) {
         return clientiService.deleteCliente(request);

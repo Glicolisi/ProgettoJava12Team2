@@ -8,9 +8,11 @@ import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.GetPrenotazioneR
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.GetVeicoloResponseDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
+import com.Team2Java12.MechAppoint.entities.Officina;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
 import com.Team2Java12.MechAppoint.entities.Veicolo;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
+import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import com.Team2Java12.MechAppoint.repositories.PrenotazioneRepository;
 import com.Team2Java12.MechAppoint.repositories.VeicoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class ClienteService {
     private VeicoloRepository veicoloRepository;
     @Autowired
     private PrenotazioneRepository prenotazioneRepository;
+    @Autowired
+    private OfficinaRepository officinaRepository;
 
     public CreateClienteResponseDTO createCliente(CreateClienteRequestDTO request) {
         Optional<Cliente> cliente = clienteRepository.findByUsername(request.getUsername());
@@ -50,6 +54,7 @@ public class ClienteService {
 
         return new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare(), cliente.getValidation().getStatus());
     }
+
     public GetClienteCompletoResponseDTO getClienteCompleto (Integer clienteId){
         if (clienteId == null) {
             throw new NotFoundException("Valore non inserito");
@@ -120,6 +125,34 @@ public class ClienteService {
         } else {
             throw new NotFoundException("Username non trovato");
         }
+    }
+
+    public BaseResponse setClienteprenotazione(SetClienteRequestDto set) {
+
+        Optional<Cliente> oCliente = clienteRepository.findById(set.getCliente_id());
+        if (oCliente.isEmpty()) {
+            throw new NotFoundException("id non trovato");
+        }
+        Cliente cliente = oCliente.get();
+        Prenotazione prenotazione = new Prenotazione(
+                set.getCreatePrenotazioneRequestDto().getNomeCliente(),
+                set.getCreatePrenotazioneRequestDto().getData(),
+                set.getCreatePrenotazioneRequestDto().getOrario());
+        prenotazione.setCliente(cliente);
+        prenotazione.setValidation(ValidationEnum.ACTIVE);
+        Optional<Officina> oOfficina = officinaRepository.findById(set.getOfficina_id());
+        if(oOfficina.isEmpty()){
+            throw new NotFoundException("Officina inesistente");
+        }
+        Officina officina = oOfficina.get();
+        prenotazione.setOfficina(officina);
+        cliente.getPrenotazioni().add(prenotazione);
+        cliente.getOfficine().add(officina);
+        prenotazioneRepository.save(prenotazione);
+        clienteRepository.save(cliente);
+
+
+        return new BaseResponse();
     }
 
     public BaseResponse deleteCliente(DeleteClienteRequestDTO delete) {
