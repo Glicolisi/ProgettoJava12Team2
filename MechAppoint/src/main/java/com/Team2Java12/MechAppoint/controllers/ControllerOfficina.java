@@ -22,9 +22,9 @@ public class ControllerOfficina {
     }
 
     @GetMapping("/officina/get")
-    public GetOfficinaResponseDto getOfficina(@io.swagger.v3.oas.annotations.parameters.RequestBody GetOfficinaRequestDto get){
+    public GetOfficinaResponseDto getOfficina(@RequestParam Integer id_officina , @RequestParam String nome_officina){
 
-        return officinaService.getOfficina(get);
+        return officinaService.getOfficina(id_officina,nome_officina);
     }
 
     @PutMapping("/officina/put")
