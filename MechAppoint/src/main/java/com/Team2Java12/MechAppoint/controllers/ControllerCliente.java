@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ControllerCliente {
     private ClienteService clientiService;
@@ -19,7 +21,15 @@ public class ControllerCliente {
 
     @PostMapping("/cliente/post")
     public CreateClienteResponseDTO createCliente(@RequestBody CreateClienteRequestDTO request) {
-        return clientiService.createCliente(request);
+        return clientiService.createCliente(request); // testato
+    }
+    @GetMapping("/cliente/getAll")
+    public List<GetClienteResponseDTO> getAllCliente() {
+        return clientiService.getAllClienti();
+    }
+    @GetMapping("/cliente/getClienteCompleto")
+    public GetClienteCompletoResponseDTO getClienteCompleto(@RequestParam Integer clienteId) {
+        return clientiService.getClienteCompleto(clienteId);
     }
 
     @GetMapping("/cliente/get")
