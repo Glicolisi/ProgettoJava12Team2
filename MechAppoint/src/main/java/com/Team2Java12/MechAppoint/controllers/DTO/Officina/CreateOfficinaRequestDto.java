@@ -10,7 +10,6 @@ public class CreateOfficinaRequestDto {
     private String nome;
     private String indirizzo;
     private String email;
-    private List<Integer> clienteIdList;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
 
     public String getNome() {
@@ -37,13 +36,6 @@ public class CreateOfficinaRequestDto {
         this.email = email;
     }
 
-    public List<Integer> getClienteIdList() {
-        return clienteIdList;
-    }
-
-    public void setClienteIdList(List<Integer> clienteIdList) {
-        this.clienteIdList = clienteIdList;
-    }
 
     public ValidationEnum getValidation() {
         return validation;

@@ -13,6 +13,7 @@ import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,15 +30,15 @@ public class OfficinaService {
     @Value("${app.feature.enablephysicaldeletion}")
     private boolean enablephysicaldeletion;
 
+    //TODO:Gestire relazione Prenotazione-Cliente
+
     public CreateOfficinaResponseDto createOfficina (CreateOfficinaRequestDto request){
 
        Optional<Officina> optionalOfficina = officinaRepository.findByNome(request.getNome());
        if(optionalOfficina.isPresent()){
            optionalOfficina.orElseThrow(() -> new ConflictException("L'oggetto è gia stato creato"));
        }
-       List<Cliente> clienteList = clienteRepository.findAllById(request.getClienteIdList());
        Officina officina = new Officina(request.getNome(), request.getIndirizzo(), request.getEmail(), request.getValidation());
-       officina.setClienti(clienteList);
        officina=officinaRepository.save(officina);
        CreateOfficinaResponseDto createOfficinaResponseDto = new CreateOfficinaResponseDto();
        createOfficinaResponseDto.setId(officina.getOfficinaid());
@@ -47,16 +48,16 @@ public class OfficinaService {
     }
 
 
-    public GetOfficinaResponseDto getOfficina(GetOfficinaRequestDto get) {
+    public GetOfficinaResponseDto getOfficina(Integer id_officina, String nome_officina) {
         Optional<Officina> optionalOfficina;
-        if (get.getNome().isEmpty() && get.getId() == null) {
+        if (id_officina == null && nome_officina == null) {
             throw new NotFoundException("Campo di ricerca non inserito");
-        } else if (get.getNome().isEmpty()) {
-            optionalOfficina=officinaRepository.findById(get.getId());
-        } else if (get.getId() == null) {
-           optionalOfficina=officinaRepository.findByNome(get.getNome());
-        } else if (!(get.getNome().isEmpty() && get.getId() == null)){
-            optionalOfficina=officinaRepository.findById(get.getId());
+        } else if (nome_officina == null) {
+            optionalOfficina=officinaRepository.findById(id_officina);
+        } else if (id_officina == null) {
+           optionalOfficina=officinaRepository.findByNome(nome_officina);
+        } else if (!(nome_officina == null && id_officina == null)){
+            optionalOfficina=officinaRepository.findById(id_officina);
         } else{
             throw new NotExistsException("Non esiste il campo richiesto");
         }
@@ -70,7 +71,7 @@ public class OfficinaService {
 
         Optional<Officina> optionalOfficina = officinaRepository.findByNome(update.getNome());
         Officina officina = optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
-        officina.setNome(update.getNome());
+        officina.setNome(update.getNomeSostituto());
         officina.setIndirizzo(update.getIndirizzo());
         officina.setEmail(update.getEmail());
         officinaRepository.save(officina);
