@@ -21,27 +21,21 @@ public class ControllerMagazzino {
 
     @PostMapping("/magazzino/create")
     public BaseResponse createMagazzino(@RequestBody CreateMagazzinoRequestDTO magazzinoDTO) {
-
         return magazzinoService.createMagazzino(magazzinoDTO);
-
-
     }
 
     @GetMapping("/magazzino/get")
-    public GetMagazzinoRequestDTO getMagazzino(@RequestBody GetMagazzinoRequestDTO get) {
-        return magazzinoService.getMagazzino(get);
+    public GetMagazzinoRequestDTO getMagazzino(@RequestParam Integer magazzinoId) {
+        return magazzinoService.getMagazzino(magazzinoId);
     }
 
     @PutMapping("/magazzino/put")
-
     public BaseResponse updateMagazzino(@RequestBody UpdateMagazzinoRequestDTO magazzinoRequestDTO) {
         magazzinoService.updateMagazzino(magazzinoRequestDTO);
         return new BaseResponse();
-
     }
 
     @DeleteMapping("/magazzino/delete")
-
     public BaseResponse deleteMagazzino(@RequestBody DeleteMagazzinoRequestDTO deleteMagazzinoRequestDTO) {
         return magazzinoService.deleteMagazzino(deleteMagazzinoRequestDTO);
     }

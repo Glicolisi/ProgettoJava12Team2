@@ -40,19 +40,17 @@ public class MagazzinoService {
         return baseResponse;
     }
 
-    public GetMagazzinoRequestDTO getMagazzino(GetMagazzinoRequestDTO get) {
-        Optional<Magazzino> aMagazzino =magazzinoRepository.findById(get.getId());
-
-        if (aMagazzino.isPresent()) {
-            Magazzino magazzino = aMagazzino.get();
+    public GetMagazzinoRequestDTO getMagazzino(Integer magazzinoId) {
+        Optional<Magazzino> oMagazzino =magazzinoRepository.findById(magazzinoId);
+        if (oMagazzino.isPresent()) {
+            Magazzino magazzino = oMagazzino.get();
             GetMagazzinoRequestDTO magazzinoDTO = new GetMagazzinoRequestDTO();
             magazzinoDTO.setNomeMagazzino(magazzino.getNomeMagazzino());
             magazzinoDTO.setId(magazzino.getId());
             return magazzinoDTO;
         } else {
-            throw new NotFoundException("NOT_FOUND");
+            throw new NotFoundException("Oggetto non trovato");
         }
-
     }
 
     public BaseResponse updateMagazzino(UpdateMagazzinoRequestDTO updateMagazzinoRequestDTO) {

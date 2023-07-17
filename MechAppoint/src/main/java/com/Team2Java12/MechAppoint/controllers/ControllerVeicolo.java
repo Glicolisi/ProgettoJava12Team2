@@ -19,8 +19,8 @@ public class ControllerVeicolo {
     }
 
     @GetMapping ("/veicolo/get")
-    public GetVeicoloResponseDTO retriveVeicolo (@RequestBody GetVeicoloRequestDTO getVeicoloRequest){
-        return veicoloService.getVeicolo(getVeicoloRequest);
+    public GetVeicoloResponseDTO retriveVeicolo (@RequestParam Integer veicoloId, @RequestParam String veicoloTarga){
+        return veicoloService.getVeicolo(veicoloId, veicoloTarga);
     }
 
 

@@ -21,9 +21,8 @@ public class ControllerPrenotazione {
 
     }
     @GetMapping("/prenotazione/get")
-    public GetPrenotazioneResponseDto getPrenotazione(@RequestBody GetPrenotazioneRequestDto getPrenotazioneRequestDto){
-
-        return prenotazioneService.getPrenotazioneResponseDto(getPrenotazioneRequestDto);
+    public GetPrenotazioneResponseDto getPrenotazione(@RequestParam Integer prenotazioneId){
+        return prenotazioneService.getPrenotazioneResponseDto(prenotazioneId);
 
     }
 

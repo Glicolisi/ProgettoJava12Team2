@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
+import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.*;
@@ -54,30 +55,35 @@ public class PrenotazioneService {
 
     }
 
-    public GetPrenotazioneResponseDto getPrenotazioneResponseDto (GetPrenotazioneRequestDto getrequest) {
+    public GetPrenotazioneResponseDto getPrenotazioneResponseDto (Integer prenotazioneId) {
         Optional<Prenotazione> optionalPrenotazione;
-        if (getrequest.getNomeCliente().isEmpty() && getrequest.getId() == null) {
-            throw new NotFoundException("Non hai inserito i campi richiesti");
-        } else if (getrequest.getNomeCliente().isEmpty()) {
-            optionalPrenotazione = prenotazioneRepository.findById(getrequest.getId());
+        if (prenotazioneId == null) {
+            throw new NotFoundException("Campo di ricerca non inserito");
         } else {
-            optionalPrenotazione = prenotazioneRepository.findById(getrequest.getId());
+            optionalPrenotazione = prenotazioneRepository.findById(prenotazioneId);
+            if (optionalPrenotazione.isEmpty()) {
+                throw new NotFoundException("Parametri non trovati");
+            }
         }
 
-        Prenotazione prenotazione = optionalPrenotazione.orElseThrow(() -> new NotFoundException("Parametri non trovati"));
+        Prenotazione prenotazione = optionalPrenotazione.get();
         return new GetPrenotazioneResponseDto(prenotazione.getId(), prenotazione.getNomeCliente(), prenotazione.getData(), prenotazione.getOrario(), prenotazione.getValidation());
 
     }
 
     public BaseResponse updatePrenotazione(UpdatePrenotazioneRequestDto updatePrenotazione) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNomeCliente(updatePrenotazione.getNomeCliente());
-        optionalPrenotazione.orElseThrow(() -> new ConflictException("Errore nell'update della prenotazione"));
-        Prenotazione prenotazione = optionalPrenotazione.orElseThrow(() -> new NotFoundException("Errore, non sono stati trovati i parametri"));
-        prenotazione.setNomeCliente(updatePrenotazione.getNomeCliente());
+        if (updatePrenotazione.getId() == null) {
+            throw new NotFoundException("Parametri non trovati");
+        }
+        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findById(updatePrenotazione.getId());
+        if (optionalPrenotazione.isEmpty()) {
+            throw new NotExistsException("Oggetto inesistente");
+        }
+        Prenotazione prenotazione = optionalPrenotazione.get();
         prenotazione.setData(updatePrenotazione.getData());
         prenotazione.setOrario(updatePrenotazione.getOrario());
-
+        prenotazioneRepository.save(prenotazione);
         return new BaseResponse();
     }
 

@@ -1,6 +1,7 @@
 package com.Team2Java12.MechAppoint.servicies;
 
 import com.Team2Java12.MechAppoint.Exception.ConflictException;
+import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.*;
@@ -41,19 +42,19 @@ public class VeicoloService {
         return createVeicoloResponse;
     }
 
-    public GetVeicoloResponseDTO getVeicolo (GetVeicoloRequestDTO getVeicoloRequest) {
+    public GetVeicoloResponseDTO getVeicolo (Integer veicoloId, String veicoloTarga) {
         Optional<Veicolo> oVeicolo;
-        if (getVeicoloRequest.getTarga().isEmpty() && getVeicoloRequest.getId() == null) {
+        if (veicoloTarga.equals(null) && veicoloId == null) {
             throw new NotFoundException("Nessun parametro inserito");
-        } else if (getVeicoloRequest.getTarga().isEmpty()) {
-            oVeicolo = veicoloRepository.findById(getVeicoloRequest.getId());
-        } else if (getVeicoloRequest.getId() == null) {
-            oVeicolo = veicoloRepository.findByTarga(getVeicoloRequest.getTarga());
+        } else if (veicoloTarga.equals(null)) {
+            oVeicolo = veicoloRepository.findById(veicoloId);
+        } else if (veicoloId == null) {
+            oVeicolo = veicoloRepository.findByTarga(veicoloTarga);
         } else {
-            oVeicolo = veicoloRepository.findById(getVeicoloRequest.getId());
+            oVeicolo = veicoloRepository.findById(veicoloId);
         }
         if (oVeicolo.isEmpty()) {
-            throw new NotFoundException("Oggetto non trovato");
+            throw new NotExistsException("Oggetto inesistente");
         }
             Veicolo veicolo = oVeicolo.get();
             GetVeicoloResponseDTO getVeicoloResponse = new GetVeicoloResponseDTO();
