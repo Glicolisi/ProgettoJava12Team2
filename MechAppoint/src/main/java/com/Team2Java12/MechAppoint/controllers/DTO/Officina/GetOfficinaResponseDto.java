@@ -2,6 +2,9 @@ package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
+import com.Team2Java12.MechAppoint.entities.Cliente;
+
+import java.util.List;
 
 public class GetOfficinaResponseDto extends BaseResponse {
 
@@ -9,7 +12,7 @@ public class GetOfficinaResponseDto extends BaseResponse {
     private String nome;
     private String indirizzo;
     private String email;
-    private
+    private List<Cliente>clienteList;
     private ValidationEnum validation;
 
     public GetOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
@@ -57,6 +60,14 @@ public class GetOfficinaResponseDto extends BaseResponse {
 
     public ValidationEnum getValidation() {
         return validation;
+    }
+
+    public List<Cliente> getClienteList() {
+        return clienteList;
+    }
+
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
 
     public void setValidation(ValidationEnum validation) {

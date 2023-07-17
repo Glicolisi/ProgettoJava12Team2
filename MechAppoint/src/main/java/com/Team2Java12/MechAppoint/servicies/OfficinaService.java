@@ -8,6 +8,7 @@ import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.entities.Officina;
+import com.Team2Java12.MechAppoint.entities.Prenotazione;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,16 @@ public class OfficinaService {
         } else{
             throw new NotExistsException("Non esiste il campo richiesto");
         }
-
         Officina officina= optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
-        return  new GetOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
-
+        GetOfficinaResponseDto get =  new GetOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
+        get.setClienteList(officina.getClienti());
+        return get;
     }
 
     public BaseResponse updateOfficina(UpdateOfficinaRequestDto update){
 
         Optional<Officina> optionalOfficina = officinaRepository.findByNome(update.getNome());
-        Officina officina = optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
+        Officina officina = optionalOfficina.orElseThrow(()-> new NotExistsException("Parametri non trovati"));
         officina.setNome(update.getNomeSostituto());
         officina.setIndirizzo(update.getIndirizzo());
         officina.setEmail(update.getEmail());
@@ -79,24 +80,38 @@ public class OfficinaService {
         return  new BaseResponse();
     }
 
+    public BaseResponse updateOfficinaClienti(UpdateOfficinaRequestClienteDto update){
+
+        Optional<Officina> optionalOfficina = officinaRepository.findById(update.getOfficina_id());
+        Officina officina = optionalOfficina.orElseThrow(()-> new NotExistsException("Parametri non trovati"));
+        officina.setNome(update.getNomeSostituto());
+        officina.setIndirizzo(update.getIndirizzo());
+        officina.setEmail(update.getEmail());
+        officina.getClienti().addAll(clienteRepository.findAllById(update.getCliente_id()));
+        officina.getClienti().stream().forEach(m->m.getPrenotazioni().addAll(officina.getPrenotazioni()));
+        officinaRepository.save(officina);
+
+        return new BaseResponse();
+    }
+
 
     public BaseResponse deleteOfficina (DeleteOfficinaRequestDto delete){
 
-    Optional<Officina> optionalOfficina = officinaRepository.findById(delete.getId());
-    if(optionalOfficina.isEmpty()){
-        throw new RuntimeException("L'oggetto non esiste");
-    }
-    Officina officina = optionalOfficina.get();
-
-        if(enablephysicaldeletion){
-            officinaRepository.delete(officina);
-        } else{
-            officina.setValidation(ValidationEnum.DELETED);
-            officinaRepository.save(officina);
+        Optional<Officina> optionalOfficina = officinaRepository.findById(delete.getId());
+        if(optionalOfficina.isEmpty()){
+            throw new RuntimeException("L'oggetto non esiste");
         }
-    BaseResponse baseResponse = new BaseResponse();
-    baseResponse.setStatus(ValidationEnum.OK);
-    return baseResponse;
+        Officina officina = optionalOfficina.get();
+
+            if(enablephysicaldeletion){
+                officinaRepository.delete(officina);
+            } else{
+                officina.setValidation(ValidationEnum.DELETED);
+                officinaRepository.save(officina);
+            }
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatus(ValidationEnum.OK);
+        return baseResponse;
 
     }
 

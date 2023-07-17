@@ -32,8 +32,15 @@ public class ControllerOfficina {
 
         officinaService.updateOfficina(update);
         return new BaseResponse();
-
     }
+
+    @PutMapping("/officina/putclienti")
+    public BaseResponse updateOfficinaClienti(@RequestBody UpdateOfficinaRequestClienteDto update){
+        officinaService.updateOfficinaClienti(update);
+        return new BaseResponse();
+    }
+
+
     @DeleteMapping("/officina/delete")
     public BaseResponse deleteOfficina(@RequestBody DeleteOfficinaRequestDto delete){
 
