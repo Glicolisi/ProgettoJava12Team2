@@ -9,6 +9,7 @@ public class GetOfficinaResponseDto extends BaseResponse {
     private String nome;
     private String indirizzo;
     private String email;
+    private
     private ValidationEnum validation;
 
     public GetOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
