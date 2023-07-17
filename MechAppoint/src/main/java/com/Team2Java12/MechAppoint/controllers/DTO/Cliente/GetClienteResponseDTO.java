@@ -1,19 +1,16 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
-import com.Team2Java12.MechAppoint.entities.Cliente;
-
-import java.util.List;
 
 public class GetClienteResponseDTO extends BaseResponse {
     private Integer id;
     private String username;
     private String password;
     private String email;
-    private Integer cellulare;
+    private String cellulare;
     private String validation = "ACTIVE";
 
-    public GetClienteResponseDTO(Integer id, String username, String password, String email, Integer cellulare, String validation) {
+    public GetClienteResponseDTO(Integer id, String username, String password, String email, String cellulare, String validation) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,11 +46,11 @@ public class GetClienteResponseDTO extends BaseResponse {
         this.email = email;
     }
 
-    public Integer getCellulare() {
+    public String getCellulare() {
         return cellulare;
     }
 
-    public void setCellulare(Integer cellulare) {
+    public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
     }
 

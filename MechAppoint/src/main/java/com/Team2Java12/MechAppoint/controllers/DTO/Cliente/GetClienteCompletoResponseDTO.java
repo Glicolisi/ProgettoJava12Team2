@@ -1,21 +1,17 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
+import com.Team2Java12.MechAppoint.controllers.DTO.Officina.GetOfficinaResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.GetPrenotazioneResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.GetVeicoloResponseDTO;
-import com.Team2Java12.MechAppoint.entities.Cliente;
-import com.Team2Java12.MechAppoint.entities.Prenotazione;
-import com.Team2Java12.MechAppoint.entities.Veicolo;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import java.util.List;
 
 public class GetClienteCompletoResponseDTO {
-    GetClienteResponseDTO cliente;
-
+    private GetClienteResponseDTO cliente;
     private List<GetVeicoloResponseDTO> veicoli;
-
     private List<GetPrenotazioneResponseDto> prenotazioni;
+    private List<GetOfficinaResponseDto> officine;
 
 
     public GetClienteResponseDTO getCliente() {
@@ -40,5 +36,13 @@ public class GetClienteCompletoResponseDTO {
 
     public void setPrenotazioni(List<GetPrenotazioneResponseDto> prenotazioni) {
         this.prenotazioni = prenotazioni;
+    }
+
+    public List<GetOfficinaResponseDto> getOfficine() {
+        return officine;
+    }
+
+    public void setOfficine(List<GetOfficinaResponseDto> officine) {
+        this.officine = officine;
     }
 }

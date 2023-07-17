@@ -14,7 +14,7 @@ public class ControllerPrenotazione {
     private PrenotazioneService prenotazioneService;
 
 
-    @PostMapping("/prenotazione/create")
+    @PostMapping("/prenotazione/create") // ok testato
     public CreatePrenotazioneResponseDto createPrenotazione (@RequestBody CreatePrenotazioneRequestDto request){
 
         return prenotazioneService.createPrenotazione(request);

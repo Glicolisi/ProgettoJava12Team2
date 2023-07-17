@@ -29,25 +29,28 @@ public class PrenotazioneService {
 
     public CreatePrenotazioneResponseDto createPrenotazione (CreatePrenotazioneRequestDto request) {
 
-        Optional<Prenotazione> optionalPrenotazione = prenotazioneRepository.findByNomeCliente(request.getNomeCliente());
-        if (optionalPrenotazione.isPresent()) {
-            optionalPrenotazione.orElseThrow(() -> new ConflictException("Errore nella creazione della prenotazione"));
-        }
-        Optional<Officina> oOfficina=officinaRepository.findById(request.getOfficinaid());
-        if (oOfficina.isEmpty()) {
-            throw new ConflictException("id officina non trovato");
-        }
-        Optional<Cliente>oCliente = clienteRepository.findById(request.getClienteId());
+        Optional<Cliente> oCliente = clienteRepository.findById(request.getClienteId());
         if (oCliente.isEmpty()) {
-            throw new ConflictException("id cliente non trovato");
+            throw new NotFoundException("id non trovato");
         }
-
-        Officina officina=oOfficina.get();
-        Cliente cliente= oCliente.get();
-        Prenotazione prenotazione = new Prenotazione(request.getNomeCliente(), request.getData(), request.getOrario(), request.getValidation());
-        prenotazione.setOfficina(officina);
+        Optional<Officina> oOfficina = officinaRepository.findById(request.getOfficinaid());
+        if (oOfficina.isEmpty()) {
+            throw new NotFoundException("Officina inesistente");
+        }
+        Cliente cliente = oCliente.get();
+        Officina officina = oOfficina.get();
+        Prenotazione prenotazione = new Prenotazione(
+                request.getNomeCliente(),
+                request.getData(),
+                request.getOrario());
         prenotazione.setCliente(cliente);
-        prenotazione = prenotazioneRepository.save(prenotazione);
+        prenotazione.setValidation(ValidationEnum.ACTIVE);
+        prenotazione.setOfficina(officina);
+        cliente.getPrenotazioni().add(prenotazione);
+        cliente.getOfficine().add(officina);
+        prenotazioneRepository.save(prenotazione);
+        clienteRepository.save(cliente);
+
         CreatePrenotazioneResponseDto createPrenotazioneResponseDto = new CreatePrenotazioneResponseDto();
         createPrenotazioneResponseDto.setId(prenotazione.getId());
         createPrenotazioneResponseDto.setStatus(ValidationEnum.OK);
