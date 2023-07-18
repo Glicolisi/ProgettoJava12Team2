@@ -4,11 +4,16 @@ import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
 import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
+import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.CreatePrenotazioneRequestDto;
+import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
+import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
 import com.Team2Java12.MechAppoint.entities.Officina;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
+import com.Team2Java12.MechAppoint.entities.Veicolo;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,22 +54,56 @@ public class OfficinaService {
     }
 
 
-    public GetOfficinaResponseDto getOfficina(Integer id_officina, String nome_officina) {
+    public GetOfficinaResponseDto getOfficina(Integer idOfficina, String nomeOfficina) {
         Optional<Officina> optionalOfficina;
-        if (id_officina == null && nome_officina == null) {
+        if (idOfficina == null && nomeOfficina == null) {
             throw new NotFoundException("Campo di ricerca non inserito");
-        } else if (nome_officina == null) {
-            optionalOfficina=officinaRepository.findById(id_officina);
-        } else if (id_officina == null) {
-           optionalOfficina=officinaRepository.findByNome(nome_officina);
-        } else if (!(nome_officina == null && id_officina == null)){
-            optionalOfficina=officinaRepository.findById(id_officina);
+        } else if (nomeOfficina == null) {
+            optionalOfficina=officinaRepository.findById(idOfficina);
+        } else if (idOfficina == null) {
+           optionalOfficina=officinaRepository.findByNome(nomeOfficina);
+        } else if (!(nomeOfficina == null && idOfficina == null)){
+            optionalOfficina=officinaRepository.findById(idOfficina);
         } else{
             throw new NotExistsException("Non esiste il campo richiesto");
         }
         Officina officina= optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
         GetOfficinaResponseDto get =  new GetOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
-        get.setClienteList(officina.getClienti());
+
+        for (Cliente cliente : officina.getClienti()){
+
+            CreateClienteRequestDTO create = new CreateClienteRequestDTO();
+
+            create.setUsername(cliente.getUsername());
+            create.setPassword(cliente.getPassword());
+            create.setEmail(cliente.getEmail());
+            create.setCellulare(cliente.getCellulare());
+            create.setValidation(cliente.getValidation());
+            get.getCreateClienteRequestDTOList().add(create);
+            for(Veicolo veicolo : cliente.getVeicoli()){
+
+                CreateVeicoloRequestDTO requestDTO = new CreateVeicoloRequestDTO();
+
+                requestDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
+                requestDTO.setTarga(veicolo.getTarga());
+                requestDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
+                requestDTO.setId_cliente(veicolo.getId());
+                get.getCreateVeicoloRequestDTOList().add(requestDTO);
+            }
+
+        }
+
+        for (Prenotazione prenotazione : officina.getPrenotazioni()){
+            PrenotazioneOfficinaDto create = new PrenotazioneOfficinaDto();
+            create.setNomeCliente(prenotazione.getNomeCliente());
+            create.setData(prenotazione.getData());
+            create.setOrario(prenotazione.getOrario());
+            create.setValidation(prenotazione.getValidation());
+            get.getCreatePrenotazioneRequestDtoList().add(create);
+        }
+
+        get.setMagazzino(officina.getMagazzino());
+
         return get;
     }
 

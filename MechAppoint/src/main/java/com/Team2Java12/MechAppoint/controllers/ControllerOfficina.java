@@ -14,38 +14,36 @@ public class ControllerOfficina {
     private OfficinaService officinaService;
 
 
-    @PostMapping("/officina/create")
+    @PostMapping("/officina/create")//ok funziona
     public CreateOfficinaResponseDto createOfficina(@RequestBody CreateOfficinaRequestDto request) {
 
         return officinaService.createOfficina(request);
-
     }
 
-    @GetMapping("/officina/get")
-    public GetOfficinaResponseDto getOfficina(@RequestParam Integer id_officina , @RequestParam String nome_officina){
+    @GetMapping("/officina/get")//ok funziona
+    public GetOfficinaResponseDto getOfficina(@RequestParam Integer idOfficina , @RequestParam String nomeOfficina){
 
-        return officinaService.getOfficina(id_officina,nome_officina);
+        return officinaService.getOfficina(idOfficina,nomeOfficina);
     }
 
-    @PutMapping("/officina/put")
+    @PutMapping("/officina/put")// ok funziona
     public BaseResponse updateOfficina(@RequestBody UpdateOfficinaRequestDto update) {
 
         officinaService.updateOfficina(update);
         return new BaseResponse();
     }
 
-    @PutMapping("/officina/putclienti")
+    @PutMapping("/officina/putclienti")// ok funziona
     public BaseResponse updateOfficinaClienti(@RequestBody UpdateOfficinaRequestClienteDto update){
         officinaService.updateOfficinaClienti(update);
         return new BaseResponse();
     }
 
 
-    @DeleteMapping("/officina/delete")
+    @DeleteMapping("/officina/delete")// ok funziona
     public BaseResponse deleteOfficina(@RequestBody DeleteOfficinaRequestDto delete){
 
         return officinaService.deleteOfficina(delete);
-
     }
 
 
