@@ -3,10 +3,7 @@ package com.Team2Java12.MechAppoint.controllers;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.CreateMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.DeleteMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.UpdateMagazzinoRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.*;
 import com.Team2Java12.MechAppoint.servicies.MagazzinoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 public class ControllerMagazzino {
     @Autowired
-
     private MagazzinoService magazzinoService;
 
 
@@ -25,7 +21,7 @@ public class ControllerMagazzino {
     }
 
     @GetMapping("/magazzino/get")
-    public GetMagazzinoRequestDTO getMagazzino(@RequestParam Integer magazzinoId) {
+    public GetMagazzinoResponseDTO getMagazzino(@RequestParam Integer magazzinoId) {
         return magazzinoService.getMagazzino(magazzinoId);
     }
 
