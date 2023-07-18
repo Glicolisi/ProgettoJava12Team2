@@ -80,16 +80,16 @@ public class OfficinaService {
             create.setCellulare(cliente.getCellulare());
             create.setValidation(cliente.getValidation());
             get.getCreateClienteRequestDTOList().add(create);
-            for(Veicolo veicolo : cliente.getVeicoli()){
-
-                CreateVeicoloRequestDTO requestDTO = new CreateVeicoloRequestDTO();
-
-                requestDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
-                requestDTO.setTarga(veicolo.getTarga());
-                requestDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
-                requestDTO.setId_cliente(veicolo.getId());
-                get.getCreateVeicoloRequestDTOList().add(requestDTO);
-            }
+//            for(Veicolo veicolo : cliente.getVeicoli()){
+//
+//                CreateVeicoloRequestDTO requestDTO = new CreateVeicoloRequestDTO();
+//
+//                requestDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
+//                requestDTO.setTarga(veicolo.getTarga());
+//                requestDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
+//                requestDTO.setId_cliente(veicolo.getId());
+//                get.getCreateVeicoloRequestDTOList().add(requestDTO);
+//            }
 
         }
 
