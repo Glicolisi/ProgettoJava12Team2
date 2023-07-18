@@ -1,6 +1,6 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.Officina.GetOfficinaResponseDto;
+import com.Team2Java12.MechAppoint.controllers.DTO.Officina.GetClienteOfficinaResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.GetPrenotazioneResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.GetVeicoloResponseDTO;
 
@@ -11,7 +11,7 @@ public class GetClienteCompletoResponseDTO {
     private GetClienteResponseDTO cliente;
     private List<GetVeicoloResponseDTO> veicoli;
     private List<GetPrenotazioneResponseDto> prenotazioni;
-    private List<GetOfficinaResponseDto> officine;
+    private List<GetClienteOfficinaResponseDto> officine;
 
 
     public GetClienteResponseDTO getCliente() {
@@ -38,11 +38,11 @@ public class GetClienteCompletoResponseDTO {
         this.prenotazioni = prenotazioni;
     }
 
-    public List<GetOfficinaResponseDto> getOfficine() {
+    public List<GetClienteOfficinaResponseDto> getOfficine() {
         return officine;
     }
 
-    public void setOfficine(List<GetOfficinaResponseDto> officine) {
+    public void setOfficine(List<GetClienteOfficinaResponseDto> officine) {
         this.officine = officine;
     }
 }

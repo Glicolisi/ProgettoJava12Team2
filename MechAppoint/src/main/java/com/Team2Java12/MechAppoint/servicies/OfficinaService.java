@@ -6,7 +6,6 @@ import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
 import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
-import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.CreatePrenotazioneRequestDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
@@ -19,9 +18,7 @@ import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,7 +33,6 @@ public class OfficinaService {
     @Value("${app.feature.enablephysicaldeletion}")
     private boolean enablephysicaldeletion;
 
-    //TODO:Gestire relazione Prenotazione-Cliente
 
     public CreateOfficinaResponseDto createOfficina (CreateOfficinaRequestDto request){
 
@@ -54,7 +50,7 @@ public class OfficinaService {
     }
 
 
-    public GetOfficinaResponseDto getOfficina(Integer idOfficina, String nomeOfficina) {
+    public GetClienteOfficinaResponseDto getOfficina(Integer idOfficina, String nomeOfficina) {
         Optional<Officina> optionalOfficina;
         if (idOfficina == null && nomeOfficina == null) {
             throw new NotFoundException("Campo di ricerca non inserito");
@@ -68,7 +64,7 @@ public class OfficinaService {
             throw new NotExistsException("Non esiste il campo richiesto");
         }
         Officina officina= optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
-        GetOfficinaResponseDto get =  new GetOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
+        GetClienteOfficinaResponseDto get =  new GetClienteOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
 
         for (Cliente cliente : officina.getClienti()){
 
@@ -80,17 +76,19 @@ public class OfficinaService {
             create.setCellulare(cliente.getCellulare());
             create.setValidation(cliente.getValidation());
             get.getCreateClienteRequestDTOList().add(create);
-//            for(Veicolo veicolo : cliente.getVeicoli()){
-//
-//                CreateVeicoloRequestDTO requestDTO = new CreateVeicoloRequestDTO();
-//
-//                requestDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
-//                requestDTO.setTarga(veicolo.getTarga());
-//                requestDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
-//                requestDTO.setId_cliente(veicolo.getId());
-//                get.getCreateVeicoloRequestDTOList().add(requestDTO);
-//            }
 
+        }
+        for(Cliente cliente : officina.getClienti()){
+            for(Veicolo veicolo : cliente.getVeicoli()){
+                CreateVeicoloRequestDTO requestDTO = new CreateVeicoloRequestDTO();
+
+                requestDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
+                requestDTO.setTarga(veicolo.getTarga());
+                requestDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
+                requestDTO.setId_cliente(veicolo.getId());
+                get.getCreateVeicoloRequestDTOList().add(requestDTO);
+
+            }
         }
 
         for (Prenotazione prenotazione : officina.getPrenotazioni()){

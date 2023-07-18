@@ -1,7 +1,5 @@
-package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
+package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
-import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
@@ -10,15 +8,11 @@ import com.Team2Java12.MechAppoint.entities.Magazzino;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetClienteOfficinaResponseDto extends BaseResponse {
-
+public class GetClienteOfficinaResponseDto {
     private Integer officinaid;
     private String nome;
     private String indirizzo;
     private String email;
-    private List<CreateClienteRequestDTO> createClienteRequestDTOList;
-    private List<PrenotazioneOfficinaDto> createPrenotazioneRequestDtoList;
-    private List<CreateVeicoloRequestDTO> createVeicoloRequestDTOList;
     private Magazzino magazzino;
     private ValidationEnum validation;
 
@@ -28,9 +22,7 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
         this.indirizzo = indirizzo;
         this.email = email;
         this.validation = validation;
-        this.createClienteRequestDTOList=new ArrayList<>();
-        this.createPrenotazioneRequestDtoList=new ArrayList<>();
-        this.magazzino=new Magazzino();
+
 
     }
 
@@ -69,30 +61,6 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
         this.email = email;
     }
 
-    public List<CreateClienteRequestDTO> getCreateClienteRequestDTOList() {
-        return createClienteRequestDTOList;
-    }
-
-    public void setCreateClienteRequestDTOList(List<CreateClienteRequestDTO> createClienteRequestDTOList) {
-        this.createClienteRequestDTOList = createClienteRequestDTOList;
-    }
-
-    public List<PrenotazioneOfficinaDto> getCreatePrenotazioneRequestDtoList() {
-        return createPrenotazioneRequestDtoList;
-    }
-
-    public void setCreatePrenotazioneRequestDtoList(List<PrenotazioneOfficinaDto> createPrenotazioneRequestDtoList) {
-        this.createPrenotazioneRequestDtoList = createPrenotazioneRequestDtoList;
-    }
-
-    public List<CreateVeicoloRequestDTO> getCreateVeicoloRequestDTOList() {
-        return createVeicoloRequestDTOList;
-    }
-
-    public void setCreateVeicoloRequestDTOList(List<CreateVeicoloRequestDTO> createVeicoloRequestDTOList) {
-        this.createVeicoloRequestDTOList = createVeicoloRequestDTOList;
-    }
-
     public Magazzino getMagazzino() {
         return magazzino;
     }
@@ -109,3 +77,4 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
         this.validation = validation;
     }
 }
+

@@ -4,12 +4,11 @@ import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.*;
-import com.Team2Java12.MechAppoint.controllers.DTO.Officina.GetOfficinaResponseDto;
+import com.Team2Java12.MechAppoint.controllers.DTO.Officina.GetClienteOfficinaResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.GetPrenotazioneResponseDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.GetVeicoloResponseDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Cliente;
-import com.Team2Java12.MechAppoint.entities.Officina;
 import com.Team2Java12.MechAppoint.entities.Prenotazione;
 import com.Team2Java12.MechAppoint.entities.Veicolo;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
@@ -86,8 +85,8 @@ public class ClienteService {
             prenotazioni.add(prenotazioneDTO);
         }
 
-        List<GetOfficinaResponseDto> officine = cliente.getOfficine().stream().map(officina ->
-                new GetOfficinaResponseDto(officina.getOfficinaid(),
+        List<GetClienteOfficinaResponseDto> officine = cliente.getOfficine().stream().map(officina ->
+                new GetClienteOfficinaResponseDto(officina.getOfficinaid(),
                         officina.getNome(),
                         officina.getIndirizzo(),
                         officina.getEmail(),
