@@ -11,7 +11,7 @@ public class Magazzino {
     @Column(name="magazzinoid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer magazzinoid;
-    private String nomeMagazzino;
+    private String nome;
     private Integer inventario;
     private ValidationEnum status;
 
@@ -20,8 +20,8 @@ public class Magazzino {
 
     private Officina officina;
 
-    public Magazzino(String nomeMagazzino, Integer inventario) {
-        this.nomeMagazzino = nomeMagazzino;
+    public Magazzino(String nome, Integer inventario) {
+        this.nome = nome;
         this.inventario = inventario;
     }
 
@@ -37,12 +37,12 @@ public class Magazzino {
         this.magazzinoid = id;
     }
 
-    public String getNomeMagazzino() {
-        return nomeMagazzino;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeMagazzino(String nomeMagazzino) {
-        this.nomeMagazzino = nomeMagazzino;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Integer getInventario() {

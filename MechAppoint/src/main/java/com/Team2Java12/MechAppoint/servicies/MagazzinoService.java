@@ -1,11 +1,10 @@
 package com.Team2Java12.MechAppoint.servicies;
 
+import com.Team2Java12.MechAppoint.Exception.ConflictException;
+import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.CreateMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.DeleteMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoRequestDTO;
-import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.UpdateMagazzinoRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.*;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-
 public class MagazzinoService {
 
     @Autowired
@@ -28,29 +26,32 @@ public class MagazzinoService {
     private OfficinaRepository officinaRepository;
 
     public BaseResponse createMagazzino(CreateMagazzinoRequestDTO magazzinoDTO) {
+        Optional<Magazzino> oMagazzino = magazzinoRepository.findByNome(magazzinoDTO.getNomeMagazzino());
+        if (oMagazzino.isPresent()) {
+            throw new ConflictException("L'oggetto è gia stato creato");
+        }
+        Optional<Officina> oOfficina = officinaRepository.findById(magazzinoDTO.getOfficinaId());
         Magazzino magazzino = new Magazzino();
-        magazzino.setNomeMagazzino(magazzinoDTO.getNomeMagazzino());
+        Officina officina = oOfficina.orElseThrow(() -> new NotFoundException("Oggetto inesistente"));
+        magazzino.setNome(magazzinoDTO.getNomeMagazzino());
         magazzino.setInventario(magazzinoDTO.getInventario());
         magazzino.setStatus(ValidationEnum.ACTIVE);
-        Optional<Officina> Oofficina = officinaRepository.findById(magazzinoDTO.getMagazzino_id());
-        Officina officina = Oofficina.get();
         magazzino.setOfficina(officina);
         magazzinoRepository.save(magazzino);
         BaseResponse baseResponse = new BaseResponse();
         return baseResponse;
     }
 
-    public GetMagazzinoRequestDTO getMagazzino(Integer magazzinoId) {
-        Optional<Magazzino> oMagazzino =magazzinoRepository.findById(magazzinoId);
-        if (oMagazzino.isPresent()) {
-            Magazzino magazzino = oMagazzino.get();
-            GetMagazzinoRequestDTO magazzinoDTO = new GetMagazzinoRequestDTO();
-            magazzinoDTO.setNomeMagazzino(magazzino.getNomeMagazzino());
-            magazzinoDTO.setId(magazzino.getId());
-            return magazzinoDTO;
-        } else {
-            throw new NotFoundException("Oggetto non trovato");
+    public GetMagazzinoResponseDTO getMagazzino(Integer magazzinoId) {
+        Optional<Magazzino> oMagazzino = magazzinoRepository.findById(magazzinoId);
+        if (oMagazzino.isEmpty()) {
+            throw new NotExistsException("Oggetto inesistente");
         }
+        Magazzino magazzino = oMagazzino.get();
+        GetMagazzinoResponseDTO getMagazzinoResponseDTO = new GetMagazzinoResponseDTO();
+        getMagazzinoResponseDTO.setNome(magazzino.getNome());
+        getMagazzinoResponseDTO.setValidation(magazzino.getStatus());
+        return getMagazzinoResponseDTO;
     }
 
     public BaseResponse updateMagazzino(UpdateMagazzinoRequestDTO updateMagazzinoRequestDTO) {
@@ -59,7 +60,7 @@ public class MagazzinoService {
             throw new RuntimeException();
         }
         Magazzino magazzino = optionalMagazzino.get();
-        magazzino.setNomeMagazzino(updateMagazzinoRequestDTO.getNomeMagazzino());
+        magazzino.setNome(updateMagazzinoRequestDTO.getNomeMagazzino());
         magazzino.setInventario(updateMagazzinoRequestDTO.getInventario());
         magazzinoRepository.save(magazzino);
         return new BaseResponse();

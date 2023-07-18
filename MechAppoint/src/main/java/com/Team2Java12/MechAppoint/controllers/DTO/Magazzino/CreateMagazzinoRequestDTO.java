@@ -5,9 +5,16 @@ import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 public class CreateMagazzinoRequestDTO {
     private String nomeMagazzino;
     private Integer inventario;
-    private Integer magazzino_id;
+    private Integer officinaId;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
 
+    public Integer getOfficinaId() {
+        return officinaId;
+    }
+
+    public void setOfficinaId(Integer officinaId) {
+        this.officinaId = officinaId;
+    }
 
     public String getNomeMagazzino() {
         return nomeMagazzino;
@@ -31,13 +38,5 @@ public class CreateMagazzinoRequestDTO {
 
     public void setValidation(ValidationEnum validation) {
         this.validation = validation;
-    }
-
-    public Integer getMagazzino_id() {
-        return magazzino_id;
-    }
-
-    public void setMagazzino_id(Integer magazzino_id) {
-        this.magazzino_id = magazzino_id;
     }
 }
