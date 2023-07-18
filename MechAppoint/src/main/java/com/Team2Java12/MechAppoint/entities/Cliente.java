@@ -16,11 +16,21 @@ public class Cliente {
     private String username;
     private String password;
     private String email;
-    private Integer cellulare;
+    private String cellulare;
     private ValidationEnum validation;
 
+    @ManyToMany
+    @JoinTable(name = "Clienti_Officine",
+            joinColumns = @JoinColumn(name = "cliente_Id"),
+            inverseJoinColumns = @JoinColumn(name = "officina_Id"))
+    private List<Officina> officine;
+    @OneToMany(mappedBy = "cliente")
+    private List<Veicolo> veicoli;
 
-    public Cliente(Integer id, String username, String password, String email, Integer cellulare, ValidationEnum validation) {
+    @OneToMany(mappedBy = "cliente")
+    private List<Prenotazione> prenotazioni;
+
+    public Cliente(Integer id, String username, String password, String email, String cellulare, ValidationEnum validation) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,7 +40,7 @@ public class Cliente {
 
     }
 
-    public Cliente(String username, String password, String email, Integer cellulare, ValidationEnum validation) {
+    public Cliente(String username, String password, String email, String cellulare, ValidationEnum validation) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -41,19 +51,6 @@ public class Cliente {
     public Cliente() {
     }
 
-    @ManyToMany
-    @JoinTable(name = "Clienti_Officine",
-            joinColumns = @JoinColumn(name = "Id"),
-            inverseJoinColumns = @JoinColumn(name = "officinaid"))
-
-    private List<Officina> officine;
-
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Veicolo> veicoli;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Prenotazione> prenotazioni;
 
     public List<Veicolo> getVeicoli() {
         return veicoli;
@@ -112,11 +109,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public Integer getCellulare() {
+    public String getCellulare() {
         return cellulare;
     }
 
-    public void setCellulare(Integer cellulare) {
+    public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
     }
 

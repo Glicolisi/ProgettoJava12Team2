@@ -1,10 +1,12 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
 public class UpdateClienteRequestDTO {
+    private Integer id;
     private String username;
     private String password;
     private String email;
-    private Integer cellulare;
+    private String cellulare;
+
 
     public String getUsername() {
         return username;
@@ -30,11 +32,19 @@ public class UpdateClienteRequestDTO {
         this.email = email;
     }
 
-    public Integer getCellulare() {
+    public String getCellulare() {
         return cellulare;
     }
 
-    public void setCellulare(Integer cellulare) {
+    public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

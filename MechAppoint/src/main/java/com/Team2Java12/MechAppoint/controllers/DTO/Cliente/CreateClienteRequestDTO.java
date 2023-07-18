@@ -6,7 +6,7 @@ public class CreateClienteRequestDTO {
     private String username;
     private String password;
     private String email;
-    private Integer cellulare;
+    private String cellulare;
     private ValidationEnum validation = ValidationEnum.ACTIVE;
 
 
@@ -35,11 +35,11 @@ public class CreateClienteRequestDTO {
         this.email = email;
     }
 
-    public Integer getCellulare() {
+    public String getCellulare() {
         return cellulare;
     }
 
-    public void setCellulare(Integer cellulare) {
+    public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
     }
 
