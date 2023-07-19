@@ -1,22 +1,16 @@
 package com.Team2Java12.MechAppoint.controllers.DTO.Cliente;
 
-import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
-import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import com.Team2Java12.MechAppoint.entities.Magazzino;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GetClienteOfficinaResponseDto {
+public class ClienteOfficinaResponseDto {
     private Integer officinaid;
     private String nome;
     private String indirizzo;
     private String email;
-    private Magazzino magazzino;
     private ValidationEnum validation;
 
-    public GetClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
+    public ClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
         this.officinaid = officinaid;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -26,7 +20,7 @@ public class GetClienteOfficinaResponseDto {
 
     }
 
-    public GetClienteOfficinaResponseDto() {
+    public ClienteOfficinaResponseDto() {
     }
 
     public Integer getOfficinaid() {
@@ -59,14 +53,6 @@ public class GetClienteOfficinaResponseDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Magazzino getMagazzino() {
-        return magazzino;
-    }
-
-    public void setMagazzino(Magazzino magazzino) {
-        this.magazzino = magazzino;
     }
 
     public ValidationEnum getValidation() {

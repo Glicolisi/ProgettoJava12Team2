@@ -85,8 +85,8 @@ public class ClienteService {
             prenotazioni.add(prenotazioneDTO);
         }
 
-        List<GetClienteOfficinaResponseDto> officine = cliente.getOfficine().stream().map(officina ->
-                new GetClienteOfficinaResponseDto(officina.getOfficinaid(),
+        List<ClienteOfficinaResponseDto> officine = cliente.getOfficine().stream().map(officina ->
+                new ClienteOfficinaResponseDto(officina.getOfficinaid(),
                         officina.getNome(),
                         officina.getIndirizzo(),
                         officina.getEmail(),
