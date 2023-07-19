@@ -77,7 +77,7 @@ public class ClienteService {
         List<GetPrenotazioneResponseDto> prenotazioni = new ArrayList<>();
         for (Prenotazione prenotazione : cliente.getPrenotazioni()) {
             GetPrenotazioneResponseDto prenotazioneDTO = new GetPrenotazioneResponseDto();
-            prenotazioneDTO.setId(prenotazione.getId());
+            prenotazioneDTO.setId(prenotazione.getPrenotazioneid());
             prenotazioneDTO.setNomeCliente(prenotazione.getNomeCliente());
             prenotazioneDTO.setData(prenotazione.getData());
             prenotazioneDTO.setOrario(prenotazione.getOrario());

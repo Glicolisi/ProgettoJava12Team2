@@ -15,7 +15,7 @@ public class ControllerPrenotazione {
     private PrenotazioneService prenotazioneService;
 
     @Operation(summary = "Creazione di una prenotazione", description = "Prenotazione correlata ad un'Officina e relativo Cliente")
-    @PostMapping("/prenotazione/create")
+    @PostMapping("/prenotazione/create") //FUNZIONA
     public CreatePrenotazioneResponseDto createPrenotazione(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Dto con i dettagli della Prenotazione e gli Id del Cliente e dell'Officina correlati")
             @RequestBody CreatePrenotazioneRequestDto request) {
@@ -23,13 +23,13 @@ public class ControllerPrenotazione {
         return prenotazioneService.createPrenotazione(request);
     }
 
-    @GetMapping("/prenotazione/get")
+    @GetMapping("/prenotazione/get") //FUNZIONA
     public GetPrenotazioneResponseDto getPrenotazione(@RequestParam Integer prenotazioneId){
         return prenotazioneService.getPrenotazioneResponseDto(prenotazioneId);
 
     }
 
-    @PutMapping("/prenotazione/put")
+    @PutMapping("/prenotazione/put")//FUNZIONA
 
     public BaseResponse updateOfficina(@RequestBody UpdatePrenotazioneRequestDto updatePrenotazioneRequestDto) {
 
@@ -37,7 +37,7 @@ public class ControllerPrenotazione {
         return new BaseResponse();
 
     }
-    @DeleteMapping("/prenotazione/delete")
+    @DeleteMapping("/prenotazione/delete")//FUNZIONA
     public BaseResponse deletePrenotazione(@RequestBody DeletePrenotazioneRequestDto deletePrenotazioneRequestDto){
 
         return prenotazioneService.deletePrenotazione(deletePrenotazioneRequestDto);

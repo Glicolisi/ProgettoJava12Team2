@@ -3,17 +3,14 @@ package com.Team2Java12.MechAppoint.entities;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name="Prenotazione")
 public class Prenotazione {
     @Id
     @Column(name="prenotazioneid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer prenotazioneid;
     private String nomeCliente;
-    //TODO cambiare in Timestamp data e orario
     private String data;
     private String orario;
     private ValidationEnum validation;
@@ -25,8 +22,8 @@ public class Prenotazione {
 
     }
 
-    public Prenotazione(Integer id, String nomeCliente, String data, String orario, ValidationEnum validation) {
-        this.id = id;
+    public Prenotazione(Integer prenotazioneid, String nomeCliente, String data, String orario, ValidationEnum validation) {
+        this.prenotazioneid = prenotazioneid;
         this.nomeCliente = nomeCliente;
         this.data = data;
         this.orario = orario;
@@ -67,12 +64,12 @@ public class Prenotazione {
     public Prenotazione() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPrenotazioneid() {
+        return prenotazioneid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPrenotazioneid(Integer prenotazioneid) {
+        this.prenotazioneid = prenotazioneid;
     }
 
     public String getNomeCliente() {

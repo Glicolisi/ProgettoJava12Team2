@@ -1,6 +1,5 @@
 package com.Team2Java12.MechAppoint.servicies;
 
-import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
 import com.Team2Java12.MechAppoint.controllers.DTO.*;
@@ -52,7 +51,7 @@ public class PrenotazioneService {
         clienteRepository.save(cliente);
 
         CreatePrenotazioneResponseDto createPrenotazioneResponseDto = new CreatePrenotazioneResponseDto();
-        createPrenotazioneResponseDto.setId(prenotazione.getId());
+        createPrenotazioneResponseDto.setId(prenotazione.getPrenotazioneid());
         createPrenotazioneResponseDto.setStatus(ValidationEnum.OK);
         return createPrenotazioneResponseDto;
 
@@ -70,7 +69,7 @@ public class PrenotazioneService {
         }
 
         Prenotazione prenotazione = optionalPrenotazione.get();
-        return new GetPrenotazioneResponseDto(prenotazione.getId(), prenotazione.getNomeCliente(), prenotazione.getData(), prenotazione.getOrario(), prenotazione.getValidation());
+        return new GetPrenotazioneResponseDto(prenotazione.getPrenotazioneid(), prenotazione.getNomeCliente(), prenotazione.getData(), prenotazione.getOrario(), prenotazione.getValidation());
 
     }
 
