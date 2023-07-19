@@ -22,13 +22,13 @@ public class ControllerPrenotazione {
 
         return prenotazioneService.createPrenotazione(request);
     }
-
+    @Operation(summary = "Richiesta dei dettagli di una prenotazione")
     @GetMapping("/prenotazione/get") //FUNZIONA
     public GetPrenotazioneResponseDto getPrenotazione(@RequestParam Integer prenotazioneId){
         return prenotazioneService.getPrenotazioneResponseDto(prenotazioneId);
 
     }
-
+    @Operation(summary = "Aggiornamento dei dettagli di una prenotazione")
     @PutMapping("/prenotazione/put")//FUNZIONA
 
     public BaseResponse updateOfficina(@RequestBody UpdatePrenotazioneRequestDto updatePrenotazioneRequestDto) {
@@ -37,6 +37,7 @@ public class ControllerPrenotazione {
         return new BaseResponse();
 
     }
+    @Operation(summary = "Cancellazione logica di una prenotazione")
     @DeleteMapping("/prenotazione/delete")//FUNZIONA
     public BaseResponse deletePrenotazione(@RequestBody DeletePrenotazioneRequestDto deletePrenotazioneRequestDto){
 
