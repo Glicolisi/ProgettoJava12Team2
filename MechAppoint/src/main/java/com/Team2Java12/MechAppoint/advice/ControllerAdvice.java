@@ -4,6 +4,7 @@ import com.Team2Java12.MechAppoint.Exception.ConflictException;
 import com.Team2Java12.MechAppoint.Exception.ForbiddenException;
 import com.Team2Java12.MechAppoint.Exception.NotExistsException;
 import com.Team2Java12.MechAppoint.Exception.NotFoundException;
+import com.Team2Java12.MechAppoint.controllers.ControllerCliente;
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 import org.springframework.http.HttpStatus;
