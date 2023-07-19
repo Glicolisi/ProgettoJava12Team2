@@ -9,10 +9,7 @@ import com.Team2Java12.MechAppoint.controllers.DTO.Officina.*;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
-import com.Team2Java12.MechAppoint.entities.Cliente;
-import com.Team2Java12.MechAppoint.entities.Officina;
-import com.Team2Java12.MechAppoint.entities.Prenotazione;
-import com.Team2Java12.MechAppoint.entities.Veicolo;
+import com.Team2Java12.MechAppoint.entities.*;
 import com.Team2Java12.MechAppoint.repositories.ClienteRepository;
 import com.Team2Java12.MechAppoint.repositories.OfficinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +97,10 @@ public class OfficinaService {
             get.getCreatePrenotazioneRequestDtoList().add(create);
         }
 
-        get.setMagazzino(officina.getMagazzino());
+        Magazzino magazzino = officina.getMagazzino();
+        get.getGetMagazzinoOfficinaRequestDto().setNomeMagazzino(magazzino.getNome());
+        get.getGetMagazzinoOfficinaRequestDto().setInventario(magazzino.getInventario());
+        get.getGetMagazzinoOfficinaRequestDto().setValidation(magazzino.getStatus());
 
         return get;
     }

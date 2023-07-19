@@ -2,6 +2,7 @@ package com.Team2Java12.MechAppoint.controllers.DTO.Officina;
 
 import com.Team2Java12.MechAppoint.controllers.DTO.BaseResponse;
 import com.Team2Java12.MechAppoint.controllers.DTO.Cliente.CreateClienteRequestDTO;
+import com.Team2Java12.MechAppoint.controllers.DTO.Magazzino.GetMagazzinoOfficinaRequestDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Prenotazione.PrenotazioneOfficinaDto;
 import com.Team2Java12.MechAppoint.controllers.DTO.Veicolo.CreateVeicoloRequestDTO;
 import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
@@ -19,7 +20,7 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
     private List<CreateClienteRequestDTO> createClienteRequestDTOList;
     private List<PrenotazioneOfficinaDto> createPrenotazioneRequestDtoList;
     private List<CreateVeicoloRequestDTO> createVeicoloRequestDTOList;
-    private Magazzino magazzino;
+    private GetMagazzinoOfficinaRequestDto getMagazzinoOfficinaRequestDto;
     private ValidationEnum validation;
 
     public GetClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
@@ -30,7 +31,7 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
         this.validation = validation;
         this.createClienteRequestDTOList=new ArrayList<>();
         this.createPrenotazioneRequestDtoList=new ArrayList<>();
-        this.magazzino=new Magazzino();
+        this.getMagazzinoOfficinaRequestDto=new GetMagazzinoOfficinaRequestDto();
 
     }
 
@@ -93,12 +94,12 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
         this.createVeicoloRequestDTOList = createVeicoloRequestDTOList;
     }
 
-    public Magazzino getMagazzino() {
-        return magazzino;
+    public GetMagazzinoOfficinaRequestDto getGetMagazzinoOfficinaRequestDto() {
+        return getMagazzinoOfficinaRequestDto;
     }
 
-    public void setMagazzino(Magazzino magazzino) {
-        this.magazzino = magazzino;
+    public void setGetMagazzinoOfficinaRequestDto(GetMagazzinoOfficinaRequestDto getMagazzinoOfficinaRequestDto) {
+        this.getMagazzinoOfficinaRequestDto = getMagazzinoOfficinaRequestDto;
     }
 
     public ValidationEnum getValidation() {
