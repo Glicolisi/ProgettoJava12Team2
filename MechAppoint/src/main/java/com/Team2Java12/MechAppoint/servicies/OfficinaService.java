@@ -61,7 +61,7 @@ public class OfficinaService {
             throw new NotExistsException("Non esiste il campo richiesto");
         }
         Officina officina= optionalOfficina.orElseThrow(()-> new NotFoundException("Parametri non trovati"));
-        GetClienteOfficinaResponseDto get =  new GetClienteOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail(), officina.getValidation());
+        GetClienteOfficinaResponseDto get =  new GetClienteOfficinaResponseDto(officina.getOfficinaid(), officina.getNome(), officina.getIndirizzo(), officina.getEmail());
 
         for (Cliente cliente : officina.getClienti()){
 
@@ -100,7 +100,6 @@ public class OfficinaService {
         Magazzino magazzino = officina.getMagazzino();
         get.getGetMagazzinoOfficinaRequestDto().setNomeMagazzino(magazzino.getNome());
         get.getGetMagazzinoOfficinaRequestDto().setInventario(magazzino.getInventario());
-        get.getGetMagazzinoOfficinaRequestDto().setValidation(magazzino.getStatus());
 
         return get;
     }

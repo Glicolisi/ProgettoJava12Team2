@@ -9,14 +9,12 @@ public class GetPrenotazioneResponseDto extends BaseResponse {
     private String nomeCliente;
     private String data;
     private String orario;
-    private ValidationEnum validation;
 
-    public GetPrenotazioneResponseDto(Integer id, String nomeCliente, String data, String orario, ValidationEnum validation) {
+    public GetPrenotazioneResponseDto(Integer id, String nomeCliente, String data, String orario) {
         this.id = id;
         this.nomeCliente = nomeCliente;
         this.data = data;
         this.orario = orario;
-        this.validation = validation;
     }
     public GetPrenotazioneResponseDto() {
     }
@@ -53,11 +51,4 @@ public class GetPrenotazioneResponseDto extends BaseResponse {
         this.orario = orario;
     }
 
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
-    }
 }

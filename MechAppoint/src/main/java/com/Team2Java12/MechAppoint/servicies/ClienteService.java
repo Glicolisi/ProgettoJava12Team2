@@ -53,7 +53,7 @@ public class ClienteService {
         }
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new NotFoundException("Id non trovato"));
 
-        return new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare(), cliente.getValidation().getStatus());
+        return new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare());
     }
 
     public GetClienteCompletoResponseDTO getClienteCompleto(Integer clienteId) {
@@ -61,16 +61,14 @@ public class ClienteService {
             throw new NotFoundException("Valore non inserito");
         }
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new NotFoundException("Id cliente non trovato"));
-        GetClienteResponseDTO clienteResponseDTO = new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare(), cliente.getValidation().getStatus());
+        GetClienteResponseDTO clienteResponseDTO = new GetClienteResponseDTO(cliente.getId(), cliente.getUsername(), cliente.getPassword(), cliente.getEmail(), cliente.getCellulare());
 
         List<GetVeicoloResponseDTO> veicoli = new ArrayList<>();
         for (Veicolo veicolo : cliente.getVeicoli()) {
             GetVeicoloResponseDTO veicoloDTO = new GetVeicoloResponseDTO();
             veicoloDTO.setTipoVeicolo(veicolo.getTipoVeicolo());
-            veicoloDTO.setProprietario(veicolo.getProprietario());
             veicoloDTO.setTarga(veicolo.getTarga());
             veicoloDTO.setDataImmatricolazione(veicolo.getDataImmatricolazione());
-            veicoloDTO.setValidation(veicolo.getValidation());
             veicoli.add(veicoloDTO);
         }
 
@@ -81,7 +79,6 @@ public class ClienteService {
             prenotazioneDTO.setNomeCliente(prenotazione.getNomeCliente());
             prenotazioneDTO.setData(prenotazione.getData());
             prenotazioneDTO.setOrario(prenotazione.getOrario());
-            prenotazioneDTO.setValidation(prenotazione.getValidation());
             prenotazioni.add(prenotazioneDTO);
         }
 
@@ -89,8 +86,7 @@ public class ClienteService {
                 new ClienteOfficinaResponseDto(officina.getOfficinaid(),
                         officina.getNome(),
                         officina.getIndirizzo(),
-                        officina.getEmail(),
-                        officina.getValidation()))
+                        officina.getEmail()))
                 .collect(Collectors.toList());
 
 
@@ -107,11 +103,12 @@ public class ClienteService {
         List<Cliente> clienti = clienteRepository.findAll();
         List<GetClienteResponseDTO> response = new ArrayList<>();
         for (Cliente cliente : clienti) {
-            response.add(new GetClienteResponseDTO(cliente.getId(),
+            response.add(new GetClienteResponseDTO(
+                    cliente.getId(),
                     cliente.getUsername(),
                     cliente.getPassword(),
-                    cliente.getEmail(), cliente.getCellulare(),
-                    cliente.getValidation().getStatus()));
+                    cliente.getEmail(),
+                    cliente.getCellulare()));
         }
 
         return response;

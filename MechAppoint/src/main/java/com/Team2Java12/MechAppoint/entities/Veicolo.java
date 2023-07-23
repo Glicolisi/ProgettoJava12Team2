@@ -15,15 +15,14 @@ public class Veicolo {
     private String tipoVeicolo;
     private String targa;
     private String dataImmatricolazione;
-    private String proprietario;
     private ValidationEnum validation;
 
-    public Veicolo(Integer id, String tipoVeicolo, String targa, String dataImmatricolazione, String proprietario) {
+    public Veicolo(Integer id, String tipoVeicolo, String targa, String dataImmatricolazione) {
         this.id = id;
         this.tipoVeicolo = tipoVeicolo;
         this.targa = targa;
         this.dataImmatricolazione = dataImmatricolazione;
-        this.proprietario = proprietario;
+
     }
 
     public Veicolo() {
@@ -32,14 +31,6 @@ public class Veicolo {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
-    public String getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
-    }
 
     public Cliente getCliente() {
         return cliente;

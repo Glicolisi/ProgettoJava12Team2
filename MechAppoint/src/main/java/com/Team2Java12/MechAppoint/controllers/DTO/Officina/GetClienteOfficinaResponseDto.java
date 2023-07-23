@@ -21,14 +21,12 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
     private List<PrenotazioneOfficinaDto> createPrenotazioneRequestDtoList;
     private List<CreateVeicoloRequestDTO> createVeicoloRequestDTOList;
     private GetMagazzinoOfficinaRequestDto getMagazzinoOfficinaRequestDto;
-    private ValidationEnum validation;
 
-    public GetClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
+    public GetClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email) {
         this.officinaid = officinaid;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.email = email;
-        this.validation = validation;
         this.createClienteRequestDTOList=new ArrayList<>();
         this.createPrenotazioneRequestDtoList=new ArrayList<>();
         this.getMagazzinoOfficinaRequestDto=new GetMagazzinoOfficinaRequestDto();
@@ -100,13 +98,5 @@ public class GetClienteOfficinaResponseDto extends BaseResponse {
 
     public void setGetMagazzinoOfficinaRequestDto(GetMagazzinoOfficinaRequestDto getMagazzinoOfficinaRequestDto) {
         this.getMagazzinoOfficinaRequestDto = getMagazzinoOfficinaRequestDto;
-    }
-
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
     }
 }

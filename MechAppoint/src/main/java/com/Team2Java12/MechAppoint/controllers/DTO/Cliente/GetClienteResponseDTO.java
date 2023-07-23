@@ -8,15 +8,14 @@ public class GetClienteResponseDTO extends BaseResponse {
     private String password;
     private String email;
     private String cellulare;
-    private String validation = "ACTIVE";
 
-    public GetClienteResponseDTO(Integer id, String username, String password, String email, String cellulare, String validation) {
+    public GetClienteResponseDTO(Integer id, String username, String password, String email, String cellulare) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.cellulare = cellulare;
-        this.validation = validation;
+
     }
 
     public GetClienteResponseDTO() {
@@ -52,14 +51,6 @@ public class GetClienteResponseDTO extends BaseResponse {
 
     public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
-    }
-
-    public String getValidation() {
-        return validation;
-    }
-
-    public void setValidation(String validation) {
-        this.validation = validation;
     }
 
     public Integer getId() {

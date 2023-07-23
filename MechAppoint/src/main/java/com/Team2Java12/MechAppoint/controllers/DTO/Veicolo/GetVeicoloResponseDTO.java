@@ -7,16 +7,6 @@ public class GetVeicoloResponseDTO {
     private String tipoVeicolo;
     private String targa;
     private String dataImmatricolazione;
-    private String proprietario;
-    private ValidationEnum validation;
-
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
-    }
 
     public String getTipoVeicolo() {
         return tipoVeicolo;
@@ -42,11 +32,4 @@ public class GetVeicoloResponseDTO {
         this.dataImmatricolazione = dataImmatricolazione;
     }
 
-    public String getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
-    }
 }

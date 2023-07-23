@@ -69,7 +69,7 @@ public class PrenotazioneService {
         }
 
         Prenotazione prenotazione = optionalPrenotazione.get();
-        return new GetPrenotazioneResponseDto(prenotazione.getPrenotazioneid(), prenotazione.getNomeCliente(), prenotazione.getData(), prenotazione.getOrario(), prenotazione.getValidation());
+        return new GetPrenotazioneResponseDto(prenotazione.getPrenotazioneid(), prenotazione.getNomeCliente(), prenotazione.getData(), prenotazione.getOrario());
 
     }
 

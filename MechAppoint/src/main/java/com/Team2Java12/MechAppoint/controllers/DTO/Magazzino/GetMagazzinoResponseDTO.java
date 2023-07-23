@@ -5,7 +5,6 @@ import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 
 public class GetMagazzinoResponseDTO extends BaseResponse {
     private String nome;
-    private ValidationEnum validation;
 
     public GetMagazzinoResponseDTO() {
     }
@@ -16,13 +15,5 @@ public class GetMagazzinoResponseDTO extends BaseResponse {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
     }
 }

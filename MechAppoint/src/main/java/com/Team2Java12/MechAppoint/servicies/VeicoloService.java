@@ -61,8 +61,6 @@ public class VeicoloService {
             getVeicoloResponse.setTipoVeicolo(veicolo.getTipoVeicolo());
             getVeicoloResponse.setTarga(veicolo.getTarga());
             getVeicoloResponse.setDataImmatricolazione(veicolo.getDataImmatricolazione());
-            getVeicoloResponse.setProprietario(veicolo.getCliente().getUsername());
-            getVeicoloResponse.setValidation(veicolo.getValidation());
             return getVeicoloResponse;
     }
 

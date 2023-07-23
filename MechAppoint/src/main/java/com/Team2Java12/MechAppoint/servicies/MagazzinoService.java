@@ -50,7 +50,6 @@ public class MagazzinoService {
         Magazzino magazzino = oMagazzino.get();
         GetMagazzinoResponseDTO getMagazzinoResponseDTO = new GetMagazzinoResponseDTO();
         getMagazzinoResponseDTO.setNome(magazzino.getNome());
-        getMagazzinoResponseDTO.setValidation(magazzino.getStatus());
         return getMagazzinoResponseDTO;
     }
 

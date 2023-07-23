@@ -8,14 +8,13 @@ public class ClienteOfficinaResponseDto {
     private String nome;
     private String indirizzo;
     private String email;
-    private ValidationEnum validation;
 
-    public ClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email, ValidationEnum validation) {
+    public ClienteOfficinaResponseDto(Integer officinaid, String nome, String indirizzo, String email) {
         this.officinaid = officinaid;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.email = email;
-        this.validation = validation;
+
 
 
     }
@@ -55,12 +54,5 @@ public class ClienteOfficinaResponseDto {
         this.email = email;
     }
 
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
-    }
 }
 

@@ -5,7 +5,6 @@ import com.Team2Java12.MechAppoint.dataStatus.ValidationEnum;
 public class GetMagazzinoOfficinaRequestDto {
     private String nomeMagazzino;
     private Integer inventario;
-    private ValidationEnum validation = ValidationEnum.ACTIVE;
 
     public String getNomeMagazzino() {
         return nomeMagazzino;
@@ -21,13 +20,5 @@ public class GetMagazzinoOfficinaRequestDto {
 
     public void setInventario(Integer inventario) {
         this.inventario = inventario;
-    }
-
-    public ValidationEnum getValidation() {
-        return validation;
-    }
-
-    public void setValidation(ValidationEnum validation) {
-        this.validation = validation;
     }
 }
